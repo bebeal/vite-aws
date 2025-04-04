@@ -1,19 +1,10 @@
 // entry-server: renders the app using the framework's SSR API: ReactDomServer.renderToString in this case
 import express from 'express';
 import ReactDomServer from 'react-dom/server';
-import { routeTree } from './routeTree.gen'
-import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
+import { createRouter } from './router';
 
-const router = createRouter({
-  routeTree,
-  defaultSsr: true,
-});
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}
+const router = createRouter();
 
 const render = async (req: express.Request) => {
   const fetchRequest = createFetchRequest(req);

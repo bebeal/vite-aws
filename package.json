@@ -17,7 +17,7 @@
     "build:cdk": "CDK_OUTDIR=cdk.out tsx cdk/cdk.ts",
     "clean": "rimraf dist node_modules yarn.lock cdk.out",
     "dev": "nodemon --watch server --exec tsx server",
-    "deploy:cdk": "yarn build && dotenv -- cdk deploy --all --require-approval never",
+    "deploy:cdk": "dotenv -- cdk deploy --all --require-approval never",
     "format": "prettier --write src server.ts api",
     "lint": "yarn eslint src server.ts api --report-unused-disable-directives --max-warnings 0",
     "postbuild": "chmod +x ./postbuild.sh && ./postbuild.sh",
@@ -25,7 +25,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-agent": "^3.777.0",
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.777.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.779.0",
     "@tanstack/react-router": "^1.114.29",
+    "@tanstack/react-start": "^1.114.31",
     "compression": "^1.8.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -85,5 +89,5 @@
   "cpu": [
     "arm64"
   ],
-  "packageManager": "yarn@4.7.0"
+  "packageManager": "yarn@4.8.1"
 }

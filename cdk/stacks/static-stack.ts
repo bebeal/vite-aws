@@ -21,8 +21,11 @@ export class StaticStack extends Stack {
     const bucket = new Bucket(this, 'vite-aws-bucket', {
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
-      autoDeleteObjects: true,
+      autoDeleteObjects: false,
     });
+
+    // Create a single S3 origin
+    const s3Origin = S3BucketOrigin.withOriginAccessControl(bucket);
 
     let certificate;
     let domainNames;
@@ -52,7 +55,7 @@ export class StaticStack extends Stack {
     const behaviors: Record<string, any> = {
       // Cache static assets longer
       '/assets/*': {
-        origin: S3BucketOrigin.withOriginAccessControl(bucket),
+        origin: s3Origin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         cachePolicy: assetsCachePolicy
@@ -71,7 +74,7 @@ export class StaticStack extends Stack {
     const distribution = new Distribution(this, 'vite-aws-distribution', {
       ...(certificate && domainNames ? { domainNames, certificate } : {}),
       defaultBehavior: {
-        origin: S3BucketOrigin.withOriginAccessControl(bucket),
+        origin: s3Origin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         cachePolicy: new CachePolicy(this, 'vite-aws-cache-policy', {
@@ -91,6 +94,12 @@ export class StaticStack extends Stack {
           responsePagePath: '/index.html',
           ttl: Duration.minutes(0),
         },
+        {
+          httpStatus: 403,
+          responseHttpStatus: 200,
+          responsePagePath: '/index.html',
+          ttl: Duration.minutes(0),
+        }
       ],
     });
 
@@ -111,7 +120,7 @@ export class StaticStack extends Stack {
     // Output the CloudFront URL
     new CfnOutput(this, 'vite-aws-url', {
       value: distribution.distributionDomainName,
-      description: 'vite-aws url',
+      description: 'vite-aws cloudfront distribution url',
     });
   }
 }

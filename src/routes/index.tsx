@@ -1,9 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
-import { ThemeToggle } from '../components/ThemeToggle/ThemeToggle';
+import { ArchitectureDiagram } from '../components/ArchitectureDiagram/ArchitectureDiagram';
 
-import "../index.css"
+import "../index.css";
 
 const Index = () => {
   const [mounted, setMounted] = useState(false);
@@ -18,7 +17,6 @@ const Index = () => {
 
   return (
     <div className='w-full h-screen flex flex-col transition-all duration-300 overflow-auto'>
-      <ThemeToggle />
       <ArchitectureDiagram />
     </div>
   );
@@ -26,4 +24,4 @@ const Index = () => {
 
 export const Route = createFileRoute('/')({
   component: Index,
-})
+});

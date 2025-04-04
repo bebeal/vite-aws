@@ -143,7 +143,5 @@ dist
 ## TODO
 
 - [ ] Easy throttle/permission control for API endpoints
-- [ ] Maybe? setup certificate ssl for custom domain (cloudflare or just assume ns are properly pointing to cloudfront distribution and the newly created certificate)
 - [ ] Add api that calls llm in bedrock
 - [ ] Update readme images
-- [ ] Get rid of docker (need reliable way to install linux deps from a darwin)
