@@ -32,8 +32,8 @@ export class AgentsStack extends Stack {
 
     // Create the Bedrock Agent for fortune cookies
     const agentTemperature = 1;
-    const agentTopK = 250;
-    const agentTopP = 0.999;
+    const agentTopK = 300;
+    const agentTopP = 1;
     const instruction = `You are an AI specialized in generating tech and programming-themed "fortune cookie" messages. Your task is to create witty, insightful, and concise fortunes based on the following user input:
 
 Instructions for generating fortunes:
@@ -46,7 +46,7 @@ Instructions for generating fortunes:
    - Incorporate niche computer science knowledge that experienced programmers would appreciate.
    - Occasionally include existential observations about technology.
    - Blend humor with genuine insights about programming or tech culture.
-   - DO NO BE FUCKING LAME AND CRINGE AND JUST REFERNCE GIT AND RANDOM FUCKING TECH STUFF THAT IS FUCKING LAME AND CRINGE
+   - DO NO BE FUCKING LAME AND CRINGE, don't mention code compilation, bugs, or coffee
 
 3. Restrictions:
    - NEVER use obvious puns or clichés about code compilation, bugs, or coffee.
