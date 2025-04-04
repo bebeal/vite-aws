@@ -1,7 +1,15 @@
 import { CfnOutput, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
-import { AllowedMethods, CachePolicy, Distribution, OriginRequestPolicy, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
+import { 
+  AllowedMethods, 
+  CachePolicy, 
+  Distribution, 
+  GeoRestriction,
+  OriginRequestPolicy, 
+  PriceClass,
+  ViewerProtocolPolicy 
+} from 'aws-cdk-lib/aws-cloudfront';
 import { RestApiOrigin, S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
@@ -70,7 +78,17 @@ export class StaticStack extends Stack {
       }
     };
 
-    // Create CloudFront distribution
+    // Block hackerman countries
+    const restrictedCountries = [
+      'RU', // Russia
+      'CN', // China
+      'KP', // North Korea
+      'IR', // Iran
+      'BY', // Belarus
+    ];
+
+    // Create CloudFront distribution with price class set to US and EU only
+    // and geo-restrictions to block high-threat countries
     const distribution = new Distribution(this, 'vite-aws-distribution', {
       ...(certificate && domainNames ? { domainNames, certificate } : {}),
       defaultBehavior: {
@@ -101,6 +119,9 @@ export class StaticStack extends Stack {
           ttl: Duration.minutes(0),
         }
       ],
+      // USA, Canada, Europe, & Israel
+      priceClass: PriceClass.PRICE_CLASS_100,
+      geoRestriction: GeoRestriction.denylist(...restrictedCountries)
     });
 
     // Deploy static files to S3 with proper caching
@@ -120,7 +141,7 @@ export class StaticStack extends Stack {
     // Output the CloudFront URL
     new CfnOutput(this, 'vite-aws-url', {
       value: distribution.distributionDomainName,
-      description: 'vite-aws cloudfront distribution url',
+      description: 'vite-aws cloudfront distribution URL (US and EU pricing tier, restricted countries blocked)',
     });
   }
 }

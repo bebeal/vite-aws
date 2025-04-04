@@ -161,20 +161,5 @@ Examples of a good fortunes:
       agentId: this.fortuneAgent.attrAgentId,
       agentAliasName: 'FortuneCookieAlias',
     });
-
-    new CfnOutput(this, 'FortuneAgentId', {
-      value: this.fortuneAgent.attrAgentId,
-      description: 'Fortune Cookie Agent ID',
-    });
-
-    new CfnOutput(this, 'FortuneAgentAliasId', {
-      value: this.fortuneAgentAlias.attrAgentAliasId,
-      description: 'Fortune Cookie Agent Alias ID',
-    });
-
-    new CfnOutput(this, 'FortuneAgentRoleArn', {
-      value: this.agentRole.roleArn,
-      description: 'Fortune Cookie Agent Role ARN',
-    });
   }
 };

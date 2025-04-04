@@ -108,11 +108,5 @@ export class ApiStack extends Stack {
         maxAge: Duration.days(1),
       },
     });
-
-    // Output the API Gateway URL
-    new CfnOutput(this, 'ApiEndpoint', {
-      value: this.api.url,
-      description: 'API Gateway Endpoint',
-    });
   }
 }
