@@ -14,7 +14,7 @@ A web application template with a cost-effective, scalable AWS architecture:
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
 <kbd>
-  <img width="1119" alt="Screenshot 2025-03-30 at 11 47 13 PM" src="https://github.com/user-attachments/assets/1c8a873d-3b98-4c15-b2c2-3b0bdb707e64" />
+  <img width="1512" alt="Screenshot 2025-04-04 at 10 00 06 AM" src="https://github.com/user-attachments/assets/0f326253-8fcb-46d1-8e6e-b26887baba97" />
 </kbd></div>
 
 ## Features
