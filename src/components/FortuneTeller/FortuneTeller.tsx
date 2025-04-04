@@ -41,7 +41,7 @@ export const FortuneTeller = () => {
         <>
           <div className="h-[1px] w-8 bg-gray-600 peer-hover:bg-purple-500"></div>
           <div className="max-w-[300px] p-4 bg-[#1a1a1a] rounded-md shadow-lg text-sm border border-gray-600 peer-hover:border-purple-500">
-            <p className="text-gray-200 font-medium whitespace-normal text-xs">🥠{fortune.replace(/🥠/g, '')}🥠</p>
+            <p className="text-gray-200 font-medium whitespace-normal text-xs">🥠{' '}{fortune.replace(/🥠/g, '')}{' '}🥠</p>
           </div>
         </>
       ) : (

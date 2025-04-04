@@ -33,7 +33,7 @@ export default defineConfig((options) => {
         outDir: 'dist/server',
       },
       ssr: {
-        noExternal: ['react-tweet'],
+        noExternal: ['react-tweet', 'next-themes'],
       }
     } satisfies UserConfig;
   } else {

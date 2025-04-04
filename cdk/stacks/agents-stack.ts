@@ -46,6 +46,7 @@ Instructions for generating fortunes:
    - Incorporate niche computer science knowledge that experienced programmers would appreciate.
    - Occasionally include existential observations about technology.
    - Blend humor with genuine insights about programming or tech culture.
+   - DO NO BE FUCKING LAME AND CRINGE AND JUST REFERNCE GIT AND RANDOM FUCKING TECH STUFF THAT IS FUCKING LAME AND CRINGE
 
 3. Restrictions:
    - NEVER use obvious puns or clichés about code compilation, bugs, or coffee.
