@@ -1,10 +1,10 @@
 <div align="center">
 
-# vite-aws
+# <img src="https://raw.githubusercontent.com/bebeal/vite-aws/main/public/favicon.ico" width="32" style="vertical-align: middle;"> vite-aws
 
 </div>
 
-A web server application template with a cost-effective, scalable AWS architecture:
+A web server application template with a cost-effective scalable AWS architecture:
 
 - Static content served via CloudFront distribution from S3
 - Serverless API endpoints using Lambda functions with Express routes for on-demand compute
@@ -26,6 +26,7 @@ A web server application template with a cost-effective, scalable AWS architectu
 * [TypeScript](https://www.typescriptlang.org/docs/)
 * [Express](https://expressjs.com/en/4x/api.html)
 * [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/overview)
+* [TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)
 * [Tailwind](https://tailwindcss.com/docs)
 * [Eslint](https://eslint.org/docs/latest/)
 * [Prettier](https://prettier.io/docs/en/)
@@ -33,6 +34,7 @@ A web server application template with a cost-effective, scalable AWS architectu
 * [AWS CloudFront](https://docs.aws.amazon.com/cloudfront/)
 * [AWS Lambda](https://docs.aws.amazon.com/lambda/)
 * [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+* [AWS Bedrock](https://docs.aws.amazon.com/bedrock/)
 
 ## Other Libraries
 
@@ -53,7 +55,7 @@ yarn                    // install dependencies
 ```
 
 <div align="center">
-    <img width="890" alt="425781036-dacb70a0-1228-4cb1-b4a6-8ee62b64aa52" src="https://github.com/user-attachments/assets/e36ed390-d7dd-428a-8938-628da134e88a" />
+    <img width="894" alt="Screenshot 2025-04-05 at 6 10 03 PM" src="https://github.com/user-attachments/assets/4432b4ee-d2a6-40ca-ba24-60c88b9e7723" />
 </div>
 
 ```bash
@@ -61,15 +63,16 @@ yarn dev          // run the development server
 ```
 
 <div align="center">
-    <img width="894" alt="425781309-25c7c40e-b8e0-4d4c-9fd7-f565d9bc9eb8" src="https://github.com/user-attachments/assets/b88065b8-a66f-4e9e-b9fc-9b5d823a4120" />
+    <img width="894" alt="Screenshot 2025-04-05 at 6 18 51 PM" src="https://github.com/user-attachments/assets/b4e63ddf-13ca-40b2-b876-4d96c1211885" />
 </div>
+
 
 ```bash
 yarn build        // build both client side and server side build
 ```
 
 <div align="center">
-    <img width="894" alt="425345804-2eb9c561-bd5a-411c-9acf-d31074abb794 (1)" src="https://github.com/user-attachments/assets/3f994f23-476b-4ed7-9109-50d40c0495f2" />
+  <img width="894" alt="Screenshot 2025-04-05 at 6 17 23 PM" src="https://github.com/user-attachments/assets/83015c72-50df-4221-b792-53a878bea486" />
 </div>
 
 **Additional Commands**
@@ -90,7 +93,7 @@ yarn deploy       // deploy the cdk
 ```
 
 <div align="center">
-    <img width="787" alt="425349353-ad9d52cc-9046-4cd2-b072-1b47083eb48d" src="https://github.com/user-attachments/assets/0ea6d023-35dc-41c6-86c5-84adc5bb19c6" />
+    <img width="894" alt="Screenshot 2025-04-05 at 6 27 30 PM" src="https://github.com/user-attachments/assets/94780d61-498c-4153-8452-bd9c05dac17d" />
 </div>
 
 ## Build
