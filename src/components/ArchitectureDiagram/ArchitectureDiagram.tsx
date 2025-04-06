@@ -51,7 +51,7 @@ const ServiceBox = ({ icon: Icon, name, description, className }: { icon: Compon
 };
 
 const RepoBox = () => (
-  <div className="border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] px-3 py-2 shadow-sm transition-all">
+  <div className="border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] px-3 py-2 shadow-sm transition-all justify-center flex">
     <a href="https://github.com/bebeal/vite-aws" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white select-none">
       <GithubIcon className="w-5 h-5" />
       <span className="text-base font-semibold whitespace-nowrap">bebeal/vite-aws</span>
