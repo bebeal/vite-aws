@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { ArchitectureDiagram } from '../components/ArchitectureDiagram/ArchitectureDiagram';
 
-import "../index.css";
+import '../index.css';
 
 const Index = () => {
   const [mounted, setMounted] = useState(false);

@@ -12,12 +12,10 @@ const render = async (req: express.Request) => {
   const path = url.pathname + url.search;
 
   await router.navigate({
-    to: path
+    to: path,
   });
   await router.load();
-  const html = ReactDomServer.renderToString(
-    <RouterProvider router={router} />
-  );
+  const html = ReactDomServer.renderToString(<RouterProvider router={router} />);
   return { html };
 };
 

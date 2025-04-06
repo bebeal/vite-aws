@@ -21,78 +21,76 @@ import { FortuneTeller } from '../FortuneTeller/FortuneTeller';
 
 const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterIcon} {...props} />);
 
-const ToolBox = ({ icon: Icon, name, description }: { icon: ComponentType<{ className?: string }>, name: string, description: string }) => {
+const ToolBox = ({ icon: Icon, name, description }: { icon: ComponentType<{ className?: string }>; name: string; description: string }) => {
   return (
-    <div className="bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-1.5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-600 gap-1">
-        <Icon className="w-5 h-5" />
-        <span className="mt-0.5 text-[11px] text-gray-800 dark:text-gray-200 text-center">{name}</span>
-        <span className="text-[9px] text-gray-600 dark:text-gray-400 text-center">{description}</span>
-      </div>
+    <div className='bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-1.5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-600 gap-1'>
+      <Icon className='w-5 h-5' />
+      <span className='mt-0.5 text-[11px] text-gray-800 dark:text-gray-200 text-center'>{name}</span>
+      <span className='text-[9px] text-gray-600 dark:text-gray-400 text-center'>{description}</span>
+    </div>
   );
 };
 
-const ServiceBox = ({ icon: Icon, name, description, className }: { icon: ComponentType<{ className?: string }>, name: string, description: string, className?: string }) => {
+const ServiceBox = ({ icon: Icon, name, description, className }: { icon: ComponentType<{ className?: string }>; name: string; description: string; className?: string }) => {
   const borderStyles = className?.includes('border') ? '' : 'border-2 border-gray-400 dark:border-gray-600';
- return (
-  <div className={`relative bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-3 flex flex-col items-center w-[140px] justify-center shrink-0 border ${borderStyles} ${className}`}>
-  <Icon className="w-12 h-12" />
-  <span className="mt-2 text-sm font-bold text-gray-800 dark:text-gray-200">{name}</span>
-  <span className="text-xs text-gray-600 dark:text-gray-400 text-center font-bold">{
-    description.split(' ').map((word, index) => (
-      <span key={index}>
-        {word}{' '}
-        {index === 0 && <br />}
+  return (
+    <div className={`relative bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-3 flex flex-col items-center w-[140px] justify-center shrink-0 border ${borderStyles} ${className}`}>
+      <Icon className='w-12 h-12' />
+      <span className='mt-2 text-sm font-bold text-gray-800 dark:text-gray-200'>{name}</span>
+      <span className='text-xs text-gray-600 dark:text-gray-400 text-center font-bold'>
+        {description.split(' ').map((word, index) => (
+          <span key={index}>
+            {word} {index === 0 && <br />}
+          </span>
+        ))}
       </span>
-    ))
-  }
-  </span>
-</div>
-)
+    </div>
+  );
 };
 
 const RepoBox = () => (
-  <div className="border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] px-3 py-2 shadow-sm transition-all justify-center flex">
-    <a href="https://github.com/bebeal/vite-aws" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white select-none">
-      <GithubIcon className="w-5 h-5" />
-      <span className="text-base font-semibold whitespace-nowrap">bebeal/vite-aws</span>
+  <div className='border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] px-3 py-2 shadow-sm transition-all justify-center flex'>
+    <a
+      href='https://github.com/bebeal/vite-aws'
+      target='_blank'
+      rel='noopener noreferrer'
+      className='flex items-center gap-2 text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white select-none'
+    >
+      <GithubIcon className='w-5 h-5' />
+      <span className='text-base font-semibold whitespace-nowrap'>bebeal/vite-aws</span>
     </a>
   </div>
 );
 
 const DevToolsBox = () => (
-  <div className="border border-gray-400 dark:border-gray-600 rounded-lg p-2 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm transition-all flex flex-col gap-1">
-    <div className="col-span-3 gap-1 flex justify-center">
-      <ToolBox icon={ViteIcon} name="Vite" description="Build Tool" />
-      <ToolBox icon={YarnIcon} name="Yarn" description="Package Manager" />
-      <ToolBox icon={ESLintIcon} name="ESLint" description="Linter" />
+  <div className='border border-gray-400 dark:border-gray-600 rounded-lg p-2 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm transition-all flex flex-col gap-1'>
+    <div className='col-span-3 gap-1 flex justify-center'>
+      <ToolBox icon={ViteIcon} name='Vite' description='Build Tool' />
+      <ToolBox icon={YarnIcon} name='Yarn' description='Package Manager' />
+      <ToolBox icon={ESLintIcon} name='ESLint' description='Linter' />
     </div>
-    <div className="col-span-3 gap-1 flex justify-center">
-        <ToolBox icon={TypeScriptIcon} name="TypeScript" description="Language" />
-        <ToolBox icon={PrettierIcon} name="Prettier" description="Formatter" />
-      </div>
+    <div className='col-span-3 gap-1 flex justify-center'>
+      <ToolBox icon={TypeScriptIcon} name='TypeScript' description='Language' />
+      <ToolBox icon={PrettierIcon} name='Prettier' description='Formatter' />
+    </div>
   </div>
 );
 
 const ClientToolsBox = () => (
-  <div className="flex items-center justify-center z-10 w-[140px] h-[130px]">
-    <div className="border-2 border-cyan-500 rounded-lg p-1 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm z-10">
-      <div className="grid grid-cols-2 gap-1">
-        <ToolBox icon={ReactIcon} name="React" description="Virtual DOM" />
-        <ToolBox icon={TanStackIcon} name="TanStack" description="Router & Queries" />
-        <ToolBox icon={NodeIcon} name="Node" description="Runtime" />
-        <ToolBox icon={TailwindIcon} name="Tailwind" description="CSS" />
+  <div className='flex items-center justify-center z-10 w-[140px] h-[130px]'>
+    <div className='border-2 border-cyan-500 rounded-lg p-1 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm z-10'>
+      <div className='grid grid-cols-2 gap-1'>
+        <ToolBox icon={ReactIcon} name='React' description='Virtual DOM' />
+        <ToolBox icon={TanStackIcon} name='TanStack' description='Router & Queries' />
+        <ToolBox icon={NodeIcon} name='Node' description='Runtime' />
+        <ToolBox icon={TailwindIcon} name='Tailwind' description='CSS' />
       </div>
     </div>
   </div>
 );
 
 // Component Box with consistent tracking implementation
-const ComponentBox = ({
-  children,
-  onPositionUpdate,
-  id,
-  className = ''
-}: ComponentProps) => {
+const ComponentBox = ({ children, onPositionUpdate, id, className = '' }: ComponentProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -115,11 +113,7 @@ const ComponentBox = ({
   }, [id, onPositionUpdate]);
 
   return (
-    <div
-      ref={ref}
-      id={id}
-      className={`${className}`}
-    >
+    <div ref={ref} id={id} className={`${className}`}>
       {children}
     </div>
   );
@@ -144,7 +138,7 @@ type ComponentProps = {
   onPositionUpdate: (id: string, rect: DOMRect, element: HTMLElement) => void;
   id: string;
   className?: string;
-}
+};
 
 // Main Architecture Diagram component
 export const ArchitectureDiagram = () => {
@@ -154,9 +148,9 @@ export const ArchitectureDiagram = () => {
 
   // Update component positions
   const updatePosition = React.useCallback((id: string, rect: DOMRect, element: HTMLElement): void => {
-    setPositions(prev => ({
+    setPositions((prev) => ({
       ...prev,
-      [id]: rect as ComponentPosition
+      [id]: rect as ComponentPosition,
     }));
 
     // Store the element reference for window resize handling
@@ -167,9 +161,9 @@ export const ArchitectureDiagram = () => {
   const updateAllPositions = React.useCallback((): void => {
     componentsRef.current.forEach((element, id) => {
       const rect = element.getBoundingClientRect();
-      setPositions(prev => ({
+      setPositions((prev) => ({
         ...prev,
-        [id]: rect as ComponentPosition
+        [id]: rect as ComponentPosition,
       }));
     });
   }, []);
@@ -194,354 +188,248 @@ export const ArchitectureDiagram = () => {
     const routes: JSX.Element[] = [];
 
     // Add the small route lines connecting client tools to client
-if (positions.client && positions.clientTools) {
-  const clientX = positions.client.left + positions.client.width / 2 - svgRect.left;
-  const clientY = positions.client.bottom - svgRect.top;
-  const toolsY = positions.clientTools.top - svgRect.top;
+    if (positions.client && positions.clientTools) {
+      const clientX = positions.client.left + positions.client.width / 2 - svgRect.left;
+      const clientY = positions.client.bottom - svgRect.top;
+      const toolsY = positions.clientTools.top - svgRect.top;
 
-  // Add the line from client to tools
-  routes.push(
-    <path
-      key="client-tools-connection"
-      d={`M ${clientX},${clientY} L ${clientX},${toolsY}`}
-      stroke="#06b6d4"
-      strokeWidth="2"
-      fill="none"
-    />
-  );
-}
+      // Add the line from client to tools
+      routes.push(<path key='client-tools-connection' d={`M ${clientX},${clientY} L ${clientX},${toolsY}`} stroke='#06b6d4' strokeWidth='2' fill='none' />);
+    }
 
-if (positions.bedrock && positions.cdk) {
+    if (positions.bedrock && positions.cdk) {
       const cdkStartX = positions.cdk.left + positions.cdk.width / 2 - svgRect.left;
       const cdkStartY = positions.cdk.bottom - svgRect.top;
       const bedrockContainerOffset = positions.bedrock.height * 0.4;
       const bedrockContainerTopY = positions.bedrock.top - bedrockContainerOffset - svgRect.top;
 
-      routes.push(
-        <path
-          key="cdk-bedrock-connection"
-          d={`M ${cdkStartX},${cdkStartY} L ${cdkStartX},${bedrockContainerTopY}`}
-          stroke="#ec4899"
-          strokeWidth="2"
-          fill="none"
-        />
-      );
+      routes.push(<path key='cdk-bedrock-connection' d={`M ${cdkStartX},${cdkStartY} L ${cdkStartX},${bedrockContainerTopY}`} stroke='#ec4899' strokeWidth='2' fill='none' />);
 
       const startY = bedrockContainerTopY + 37;
       routes.push(
-        <path
-          key="cdk-bedrock-connection-part2"
-          d={`M ${cdkStartX},${startY} L ${cdkStartX},${bedrockContainerTopY + 19}`}
-          stroke="#ec4899"
-          strokeWidth="2"
-          fill="none"
-        />
+        <path key='cdk-bedrock-connection-part2' d={`M ${cdkStartX},${startY} L ${cdkStartX},${bedrockContainerTopY + 19}`} stroke='#ec4899' strokeWidth='2' fill='none' />,
       );
     }
 
     if (positions.bedrock && positions.fortuneTeller) {
       const startX = positions.fortuneTeller.left - svgRect.left;
-      const startY = positions.fortuneTeller.top + positions.fortuneTeller.height/2 - svgRect.top;
+      const startY = positions.fortuneTeller.top + positions.fortuneTeller.height / 2 - svgRect.top;
       const endX = positions.bedrock.right - svgRect.left;
-      const endY = positions.bedrock.top + positions.bedrock.height/2 - svgRect.top;
+      const endY = positions.bedrock.top + positions.bedrock.height / 2 - svgRect.top;
 
       routes.push(
-        <g key="fortune-bedrock-arrow">
-          <path
-            d={`M ${startX},${startY} L ${endX},${endY}`}
-            stroke="#00b8db"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
-          />
-          <text
-            x={(startX + endX)/2}
-            y={(startY + endY)/2 - 8}
-            textAnchor="middle"
-            fill="#00b8db"
-            fontSize="12"
-            fontWeight="600"
-          >
+        <g key='fortune-bedrock-arrow'>
+          <path d={`M ${startX},${startY} L ${endX},${endY}`} stroke='#00b8db' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+          <text x={(startX + endX) / 2} y={(startY + endY) / 2 - 8} textAnchor='middle' fill='#00b8db' fontSize='12' fontWeight='600'>
             /api/fortune
           </text>
-        </g>
+        </g>,
       );
     }
 
     if (positions.client && positions.cloudfront) {
       const startX = positions.client.right - svgRect.left;
-      const startY = positions.client.top + positions.client.height/2 - svgRect.top;
+      const startY = positions.client.top + positions.client.height / 2 - svgRect.top;
       const endX = positions.cloudfront.left - svgRect.left;
-      const endY = positions.cloudfront.top + positions.cloudfront.height/2 - svgRect.top;
+      const endY = positions.cloudfront.top + positions.cloudfront.height / 2 - svgRect.top;
 
       routes.push(
-        <g key="client-cloudfront">
-          <path
-            d={`M ${startX},${startY} L ${endX},${endY}`}
-            stroke="#06b6d4"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
-          />
-          <text
-            x={(startX + endX)/2 + 4}
-            y={(startY + endY)/2 - 8}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill="#06b6d4"
-            fontSize="12"
-            fontWeight="600"
-          >
+        <g key='client-cloudfront'>
+          <path d={`M ${startX},${startY} L ${endX},${endY}`} stroke='#06b6d4' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+          <text x={(startX + endX) / 2 + 4} y={(startY + endY) / 2 - 8} textAnchor='middle' dominantBaseline='middle' fill='#06b6d4' fontSize='12' fontWeight='600'>
             &lt;domain&gt;/*
           </text>
-        </g>
+        </g>,
       );
     }
 
     if (positions.cloudfront && positions.s3) {
       const startX = positions.cloudfront.right - svgRect.left;
-      const startY = positions.cloudfront.top + positions.cloudfront.height/2 - svgRect.top;
+      const startY = positions.cloudfront.top + positions.cloudfront.height / 2 - svgRect.top;
       const endX = positions.s3.left - svgRect.left;
-      const endY = positions.s3.top + positions.s3.height/2 - svgRect.top;
+      const endY = positions.s3.top + positions.s3.height / 2 - svgRect.top;
 
       routes.push(
-        <g key="cloudfront-s3">
-          <path
-            d={`M ${startX},${startY} L ${endX},${endY}`}
-            stroke="#06b6d4"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
-          />
-          <text
-            x={(startX + endX)/2}
-            y={(startY + endY)/2 - 10}
-            textAnchor="middle"
-            fill="#06b6d4"
-            fontSize="12"
-            fontWeight="600"
-          >
+        <g key='cloudfront-s3'>
+          <path d={`M ${startX},${startY} L ${endX},${endY}`} stroke='#06b6d4' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+          <text x={(startX + endX) / 2} y={(startY + endY) / 2 - 10} textAnchor='middle' fill='#06b6d4' fontSize='12' fontWeight='600'>
             /assets/*
           </text>
-        </g>
+        </g>,
       );
     }
 
     if (positions.cloudfront && positions.apigateway) {
-      const startX = positions.cloudfront.left + positions.cloudfront.width/2 - svgRect.left;
+      const startX = positions.cloudfront.left + positions.cloudfront.width / 2 - svgRect.left;
       const startY = positions.cloudfront.bottom - svgRect.top;
-      const endX = positions.apigateway.left + positions.apigateway.width/2 - svgRect.left;
+      const endX = positions.apigateway.left + positions.apigateway.width / 2 - svgRect.left;
       const endY = positions.apigateway.top - svgRect.top;
 
       routes.push(
-        <g key="cloudfront-apigateway">
+        <g key='cloudfront-apigateway'>
           <path
-            d={`M ${startX},${startY} L ${startX},${(startY + endY)/2} L ${endX},${(startY + endY)/2} L ${endX},${endY}`}
-            stroke="#06b6d4"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
+            d={`M ${startX},${startY} L ${startX},${(startY + endY) / 2} L ${endX},${(startY + endY) / 2} L ${endX},${endY}`}
+            stroke='#06b6d4'
+            strokeWidth='2'
+            fill='none'
+            markerEnd='url(#arrowhead)'
           />
-          <text
-            x={(startX + endX)/2}
-            y={(startY + endY)/2 - 10}
-            textAnchor="middle"
-            fill="#06b6d4"
-            fontSize="12"
-            fontWeight="600"
-          >
+          <text x={(startX + endX) / 2} y={(startY + endY) / 2 - 10} textAnchor='middle' fill='#06b6d4' fontSize='12' fontWeight='600'>
             /api/*
           </text>
-        </g>
+        </g>,
       );
     }
 
     if (positions.apigateway && positions.lambda) {
       const startX = positions.apigateway.right - svgRect.left;
-      const startY = positions.apigateway.top + positions.apigateway.height/2 - svgRect.top;
+      const startY = positions.apigateway.top + positions.apigateway.height / 2 - svgRect.top;
       const endX = positions.lambda.left - svgRect.left;
-      const endY = positions.lambda.top + positions.lambda.height/2 - svgRect.top;
+      const endY = positions.lambda.top + positions.lambda.height / 2 - svgRect.top;
 
       routes.push(
-        <g key="apigateway-lambda">
-          <path
-            d={`M ${startX},${startY} L ${endX},${endY}`}
-            stroke="#06b6d4"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
-          />
-        </g>
+        <g key='apigateway-lambda'>
+          <path d={`M ${startX},${startY} L ${endX},${endY}`} stroke='#06b6d4' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+        </g>,
       );
     }
 
     if (positions.lambda && positions.express) {
       const startX = positions.lambda.right - svgRect.left;
-      const startY = positions.lambda.top + positions.lambda.height/2 - svgRect.top;
+      const startY = positions.lambda.top + positions.lambda.height / 2 - svgRect.top;
       const endX = positions.express.left - svgRect.left;
-      const endY = positions.express.top + positions.express.height/2 - svgRect.top;
+      const endY = positions.express.top + positions.express.height / 2 - svgRect.top;
 
       routes.push(
-        <g key="lambda-express">
-          <path
-            d={`M ${startX},${startY} L ${endX},${endY}`}
-            stroke="#06b6d4"
-            strokeWidth="2"
-            fill="none"
-            markerEnd="url(#arrowhead)"
-          />
-        </g>
+        <g key='lambda-express'>
+          <path d={`M ${startX},${startY} L ${endX},${endY}`} stroke='#06b6d4' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+        </g>,
       );
     }
 
     if (positions.cdk && positions.express) {
       // Connect a line from the left of CDK to the pink vertical border
       const cdkX = positions.cdk.left - svgRect.left;
-      const cdkY = positions.cdk.top + positions.cdk.height/2 - svgRect.top;
+      const cdkY = positions.cdk.top + positions.cdk.height / 2 - svgRect.top;
 
       // Calculate distance between CDK and Express
       const distance = Math.abs(cdkX - (positions.express.right - svgRect.left));
 
       // Use a percentage of that distance to find border position so it scales with the page
-      const borderX = positions.express.right - svgRect.left + (distance * 0.62);
+      const borderX = positions.express.right - svgRect.left + distance * 0.62;
 
       routes.push(
-        <g key="cdk-bedrock">
-          <path
-            d={`M ${cdkX},${cdkY} L ${borderX},${cdkY}`}
-            stroke="#ec4899"
-            strokeWidth="2"
-            fill="none"
-          />
-        </g>
-      )
+        <g key='cdk-bedrock'>
+          <path d={`M ${cdkX},${cdkY} L ${borderX},${cdkY}`} stroke='#ec4899' strokeWidth='2' fill='none' />
+        </g>,
+      );
     }
 
     return routes;
   };
 
   return (
-    <div className="w-full flex flex-col items-center py-6 bg-gray-200 dark:bg-[#2a2a2a] transition-all overflow-hidden">
-      <div className="w-auto flex gap-8">
+    <div className='w-full flex flex-col items-center py-6 bg-gray-200 dark:bg-[#2a2a2a] transition-all overflow-hidden'>
+      <div className='w-auto flex gap-8'>
         {/* Left section: Repository and Dev Tools */}
-        <div className="flex flex-col shrink-0">
+        <div className='flex flex-col shrink-0'>
           <RepoBox />
           {/* Vertical connecting line */}
-          <div className="w-[1px] h-16 bg-gray-400 dark:bg-gray-600 mx-auto relative">
+          <div className='w-[1px] h-16 bg-gray-400 dark:bg-gray-600 mx-auto relative'>
             {/* Horizontal line from middle */}
-            <div className="absolute top-1/2 right-0 w-[200px] border-t border-gray-400 dark:border-gray-600 translate-x-full"></div>
+            <div className='absolute top-1/2 right-0 w-[200px] border-t border-gray-400 dark:border-gray-600 translate-x-full'></div>
           </div>
           <DevToolsBox />
         </div>
 
         {/* Main Architecture Diagram - Fixed grid layout */}
-        <div className="flex-1 flex flex-col">
-          <div className="border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] p-4 relative shadow-sm">
+        <div className='flex-1 flex flex-col'>
+          <div className='border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] p-4 relative shadow-sm'>
             {/* SVG for connections */}
-            <svg ref={svgRef} className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-9">
-            <defs>
-                <marker
-                  id="arrowhead"
-                  markerWidth="3"
-                  markerHeight="3"
-                  refX="1"
-                  refY="1.5"
-                  orient="auto"
-                >
-                  <polygon points="0 0, 1.8 1.5, 0 3" fill="#06b6d4" />
+            <svg ref={svgRef} className='absolute inset-0 w-full h-full pointer-events-none overflow-visible z-9'>
+              <defs>
+                <marker id='arrowhead' markerWidth='3' markerHeight='3' refX='1' refY='1.5' orient='auto'>
+                  <polygon points='0 0, 1.8 1.5, 0 3' fill='#06b6d4' />
                 </marker>
-                <marker
-                  id="pinkArrowhead"
-                  markerWidth="3"
-                  markerHeight="3"
-                  refX="1"
-                  refY="1.5"
-                  orient="auto"
-                >
-                  <polygon points="0 0, 1.8 1.5, 0 3" fill="#ec4899" />
+                <marker id='pinkArrowhead' markerWidth='3' markerHeight='3' refX='1' refY='1.5' orient='auto'>
+                  <polygon points='0 0, 1.8 1.5, 0 3' fill='#ec4899' />
                 </marker>
               </defs>
               {drawRoutes()}
             </svg>
 
             {/* Main content with fixed grid layout to prevent alignment issues */}
-            <div className="grid grid-cols-12 gap-x-8 relative">
+            <div className='grid grid-cols-12 gap-x-8 relative'>
               {/* Client Browser */}
-              <div className="col-span-2 flex flex-col items-center">
-                <div className="mt-[18px]">
-                  <ComponentBox id="client" onPositionUpdate={updatePosition} className="relative z-10">
-                    <ServiceBox icon={WebIcon} name="Web" description="Client Browser" className="border-2 border-cyan-500 dark:border-cyan-500" />
+              <div className='col-span-2 flex flex-col items-center'>
+                <div className='mt-[18px]'>
+                  <ComponentBox id='client' onPositionUpdate={updatePosition} className='relative z-10'>
+                    <ServiceBox icon={WebIcon} name='Web' description='Client Browser' className='border-2 border-cyan-500 dark:border-cyan-500' />
                   </ComponentBox>
                 </div>
-                <div className="mt-10">
-                  <ComponentBox id="clientTools" onPositionUpdate={updatePosition}>
+                <div className='mt-10'>
+                  <ComponentBox id='clientTools' onPositionUpdate={updatePosition}>
                     <ClientToolsBox />
                   </ComponentBox>
                 </div>
               </div>
 
               {/* Middle section */}
-              <div className="col-span-8 flex flex-col justify-center gap-40 relative">
-              <div className="absolute right-0 top-[10%] bottom-[10%] border-r-2 border-pink-500" />
+              <div className='col-span-8 flex flex-col justify-center gap-40 relative'>
+                <div className='absolute right-0 top-[10%] bottom-[10%] border-r-2 border-pink-500' />
                 {/* Static stack */}
-                <div className="border-2 border-pink-500 rounded-lg p-4 relative shadow-sm">
-                  <div className="absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium">
-                    vite-aws-static
-                  </div>
-                  <div className="grid grid-cols-2 justify-items-center">
-                    <ComponentBox id="cloudfront" onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={CloudFrontIcon} name="CloudFront" description="Content Delivery" />
+                <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm'>
+                  <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-static</div>
+                  <div className='grid grid-cols-2 justify-items-center'>
+                    <ComponentBox id='cloudfront' onPositionUpdate={updatePosition}>
+                      <ServiceBox icon={CloudFrontIcon} name='CloudFront' description='Content Delivery' />
                     </ComponentBox>
 
-                    <ComponentBox id="s3" onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={S3Icon} name="S3" description="Static Assets" />
+                    <ComponentBox id='s3' onPositionUpdate={updatePosition}>
+                      <ServiceBox icon={S3Icon} name='S3' description='Static Assets' />
                     </ComponentBox>
                   </div>
                 </div>
 
                 {/* API stack */}
-                <div className="border-2 border-pink-500 rounded-lg p-4 relative shadow-sm">
-                  <div className="absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium">
-                    vite-aws-api
-                  </div>
-                  <div className="grid grid-cols-3 justify-items-center">
-                    <ComponentBox id="apigateway" onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={APIGatewayIcon} name="API Gateway" description="REST API" />
+                <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm'>
+                  <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-api</div>
+                  <div className='grid grid-cols-3 justify-items-center'>
+                    <ComponentBox id='apigateway' onPositionUpdate={updatePosition}>
+                      <ServiceBox icon={APIGatewayIcon} name='API Gateway' description='REST API' />
                     </ComponentBox>
 
-                    <ComponentBox id="lambda" onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={LambdaIcon} name="Lambda" description="Serverless Compute" />
+                    <ComponentBox id='lambda' onPositionUpdate={updatePosition}>
+                      <ServiceBox icon={LambdaIcon} name='Lambda' description='Serverless Compute' />
                     </ComponentBox>
 
-                    <ComponentBox id="express" onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={ExpressIcon} name="Express" description="API Router"/>
+                    <ComponentBox id='express' onPositionUpdate={updatePosition}>
+                      <ServiceBox icon={ExpressIcon} name='Express' description='API Router' />
                     </ComponentBox>
                   </div>
                 </div>
               </div>
 
               {/* CDK box */}
-              <div className="col-span-2 flex items-center justify-center">
-                <ComponentBox id="cdk" onPositionUpdate={updatePosition} className="relative">
-                  <ServiceBox icon={CDKIcon} name="CDK" description="Infrastructure as Code" className="border-2 border-pink-500 dark:border-pink-500" />
+              <div className='col-span-2 flex items-center justify-center'>
+                <ComponentBox id='cdk' onPositionUpdate={updatePosition} className='relative'>
+                  <ServiceBox icon={CDKIcon} name='CDK' description='Infrastructure as Code' className='border-2 border-pink-500 dark:border-pink-500' />
                 </ComponentBox>
               </div>
             </div>
           </div>
 
           {/* Bedrock Agent Section */}
-          <div className="border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] p-4 mt-4 shadow-sm transition-all">
-            <div className="border-2 border-pink-500 rounded-lg p-4 relative shadow-sm max-w-[780px] mx-auto left-15">
-              <div className="absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium">
-                vite-aws-agents
-              </div>
-              <div className="flex justify-center gap-30 grid-cols-3 w-full">
-                <ComponentBox id="bedrock" onPositionUpdate={updatePosition}>
-                  <ServiceBox icon={BedrockIcon} name="Bedrock" description="AI Agent" />
+          <div className='border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] p-4 mt-4 shadow-sm transition-all'>
+            <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm max-w-[780px] mx-auto left-15'>
+              <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-agents</div>
+              <div className='flex justify-center gap-30 grid-cols-3 w-full'>
+                <ComponentBox id='bedrock' onPositionUpdate={updatePosition}>
+                  <ServiceBox icon={BedrockIcon} name='Bedrock' description='AI Agent' />
                 </ComponentBox>
 
                 {/* Fortune teller */}
-                <ComponentBox id="fortuneTeller" onPositionUpdate={updatePosition} className="flex items-center">
+                <ComponentBox id='fortuneTeller' onPositionUpdate={updatePosition} className='flex items-center'>
                   <FortuneTeller />
                 </ComponentBox>
               </div>

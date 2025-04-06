@@ -17,7 +17,7 @@
     "build:cdk": "CDK_OUTDIR=cdk.out tsx cdk/cdk.ts",
     "clean": "rimraf dist cdk.out",
     "dev": "nodemon --watch server --exec tsx server",
-    "deploy:cdk": "dotenv -- cdk deploy --all --require-approval never",
+    "deploy": "dotenv -- cdk deploy --all --require-approval never",
     "format": "prettier --write src server.ts api",
     "lint": "yarn eslint src server.ts api --report-unused-disable-directives --max-warnings 0",
     "postbuild": "chmod +x ./postbuild.sh && ./postbuild.sh",

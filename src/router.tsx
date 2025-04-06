@@ -12,7 +12,11 @@ export function createRouter(options?: RouterConstructorOptions<AnyRoute, 'never
   return createReactRouter({
     routeTree,
     defaultNotFoundComponent: () => <>Not Found</>,
-    defaultPendingComponent: () => <div className="fixed inset-0 flex items-center justify-center"><Loader /></div>,
+    defaultPendingComponent: () => (
+      <div className='fixed inset-0 flex items-center justify-center'>
+        <Loader />
+      </div>
+    ),
     defaultPreload: 'intent',
     defaultSsr: true,
     context: {
@@ -38,14 +42,14 @@ export function createRouter(options?: RouterConstructorOptions<AnyRoute, 'never
             {children}
           </ThemeProvider>
         </QueryClientProvider>
-      )
+      );
     },
-    ...options
-  })
+    ...options,
+  });
 }
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: ReturnType<typeof createRouter>
+    router: ReturnType<typeof createRouter>;
   }
 }
