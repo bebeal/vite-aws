@@ -1,4 +1,5 @@
 import React, { ComponentType, HTMLProps, JSX, memo } from 'react';
+import AnthropicIcon from '../../assets/icons/anthropic.svg';
 import APIGatewayIcon from '../../assets/icons/apigateway.svg';
 import BedrockIcon from '../../assets/icons/bedrock.svg';
 import CDKIcon from '../../assets/icons/cdk.svg';
@@ -16,10 +17,12 @@ import TypeScriptIcon from '../../assets/icons/typescript.svg';
 import ViteIcon from '../../assets/icons/vite.svg';
 import WebIcon from '../../assets/icons/web.svg';
 import YarnIcon from '../../assets/icons/yarn.svg';
+import ClaudeIcon from '../../assets/images/claude3_7.png';
 import TanStackRouterIcon from '../../assets/images/tanstack-router.png';
 import { FortuneTeller } from '../FortuneTeller/FortuneTeller';
 
 const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterIcon} {...props} />);
+const Claude37Icon = memo((props: HTMLProps<HTMLImageElement>) => <img src={ClaudeIcon} {...props} />);
 
 const ToolBox = ({ icon: Icon, name, description }: { icon: ComponentType<{ className?: string }>; name: string; description: string }) => {
   return (
@@ -31,18 +34,21 @@ const ToolBox = ({ icon: Icon, name, description }: { icon: ComponentType<{ clas
   );
 };
 
-const ServiceBox = ({ icon: Icon, name, description, className }: { icon: ComponentType<{ className?: string }>; name: string; description: string; className?: string }) => {
+const ServiceBox = ({ icon: Icon, name, description, className }: { icon: ComponentType<{ className?: string }>; name: string; description: ReactNode; className?: string }) => {
   const borderStyles = className?.includes('border') ? '' : 'border-2 border-gray-400 dark:border-gray-600';
   return (
     <div className={`relative bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-3 flex flex-col items-center w-[140px] justify-center shrink-0 border ${borderStyles} ${className}`}>
       <Icon className='w-12 h-12' />
       <span className='mt-2 text-sm font-bold text-gray-800 dark:text-gray-200'>{name}</span>
       <span className='text-xs text-gray-600 dark:text-gray-400 text-center font-bold'>
-        {description.split(' ').map((word, index) => (
-          <span key={index}>
-            {word} {index === 0 && <br />}
-          </span>
-        ))}
+        {typeof description === 'string'
+          ? description.split(' ').map((word, index) => (
+              <span key={index}>
+                {word} {index === 0 && <br />}
+              </span>
+            ))
+          : description
+        }
       </span>
     </div>
   );
@@ -325,6 +331,19 @@ export const ArchitectureDiagram = () => {
       );
     }
 
+    if (positions.claude && positions.bedrock) {
+      const startX = positions.claude.right - svgRect.left;
+      const startY = positions.claude.top + positions.claude.height / 2 - svgRect.top;
+      const endX = positions.bedrock.left - svgRect.left;
+      const endY = positions.bedrock.top + positions.bedrock.height / 2 - svgRect.top;
+      
+      routes.push(
+        <g key='claude-bedrock'>
+          <path d={`M ${endX},${endY} L ${startX},${startY}`} stroke='#00b8db' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
+        </g>,
+      );
+    }
+
     return routes;
   };
 
@@ -421,12 +440,26 @@ export const ArchitectureDiagram = () => {
 
           {/* Bedrock Agent Section */}
           <div className='border border-gray-400 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-[#1a1a1a] p-4 mt-4 shadow-sm transition-all'>
-            <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm max-w-[780px] mx-auto left-15'>
+            <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm max-w-[930px] mx-auto left-2'>
               <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-agents</div>
               <div className='flex justify-center gap-30 grid-cols-3 w-full'>
+                <div className='flex items-center gap-4'>
+                  <ComponentBox id='claude' onPositionUpdate={updatePosition}>
+                  <ServiceBox
+                    icon={AnthropicIcon}
+                    name='Anthropic'
+                    description={
+                    <div className='flex items-center gap-px justify-center text-center'>
+                      <span className="">
+                        <Claude37Icon className="w-3 h-3 inline-block self-center object-contain" /> Claude 3.7 Sonnet
+                      </span>
+                    </div>}
+                  />
+                </ComponentBox>
                 <ComponentBox id='bedrock' onPositionUpdate={updatePosition}>
                   <ServiceBox icon={BedrockIcon} name='Bedrock' description='AI Agent' />
                 </ComponentBox>
+                </div>
 
                 {/* Fortune teller */}
                 <ComponentBox id='fortuneTeller' onPositionUpdate={updatePosition} className='flex items-center'>
