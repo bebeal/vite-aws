@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "allowJs": true,
+    "composite": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "incremental": true,
+    "outDir": "dist/server",
+    "target": "ESNext",
+
+    /* Module Resolution */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node", "vite/client"],
+
+    /* Linting */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": ["vite.config.ts", "server.ts", "api"],
+  "exclude": ["src", "dist", "cdk", "cdk.out"]
+}
