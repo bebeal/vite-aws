@@ -46,6 +46,14 @@ Template for a A web server application deployed with a cost-effective scalable 
 * [react-tweet](https://github.com/vercel/react-tweet)
 * [next-themes](https://github.com/pacocoursey/next-themes)
 
+## Environment Setup
+
+After cloning, copy `.env.example` to `.env` and add your AWS credentials.
+
+<small>
+Note: Env variables are injected into the lambda function as environment variables. (except for reserved AWS variables)
+</small>
+
 ## Development
 
 Using yarn
@@ -109,45 +117,51 @@ dist
 │   ├── assets
 │   │   ├── BerkeleyMonoVariable-DfD1MzWf.woff2                 162.33 kB │ gzip:   162.43 kB
 │   │   ├── BerkeleyMonoVariable-IbYT6BjK.ttf                   507.43 kB │ gzip:   208.20 kB
-│   │   ├── FloatingTanStackRouterDevtools-CsCCUC4G.js           52.55 kB │ gzip:    15.34 kB
-│   │   ├── FloatingTanStackRouterDevtools-CsCCUC4G.js.map      137.62 kB │ gzip:    33.05 kB
-│   │   ├── SUXNJKMM-BvnQhBpn.js                                219.52 kB │ gzip:    62.32 kB
-│   │   ├── SUXNJKMM-BvnQhBpn.js.map                            729.00 kB │ gzip:   164.26 kB
-│   │   ├── index-C9zNQ8au.css                                   15.85 kB │ gzip:     4.19 kB
-│   │   ├── index-Dmh8XN9q.js                                    69.47 kB │ gzip:    18.51 kB
-│   │   ├── index-Dmh8XN9q.js.map                               100.94 kB │ gzip:    25.76 kB
-│   │   ├── index-DtGNtL55.js                                   330.24 kB │ gzip:    99.33 kB
-│   │   ├── index-DtGNtL55.js.map                              1401.67 kB │ gzip:   297.35 kB
-│   │   ├── react-Bw2ukkxk.js                                    32.78 kB │ gzip:    10.54 kB
-│   │   ├── react-Bw2ukkxk.js.map                               112.04 kB │ gzip:    28.12 kB
-│   │   ├── tanstack-UAA9rOcg.js                                162.37 kB │ gzip:    50.02 kB
-│   │   ├── tanstack-UAA9rOcg.js.map                            694.70 kB │ gzip:   176.79 kB
+│   │   ├── FloatingTanStackRouterDevtools-BrvLUCF_.js           52.55 kB │ gzip:    15.34 kB
+│   │   ├── FloatingTanStackRouterDevtools-BrvLUCF_.js.map      137.62 kB │ gzip:    33.05 kB
+│   │   ├── SUXNJKMM-BR_7YIqf.js                                219.53 kB │ gzip:    62.32 kB
+│   │   ├── SUXNJKMM-BR_7YIqf.js.map                            729.00 kB │ gzip:   164.27 kB
+│   │   ├── ai21labs-Dm-89zQZ.jpeg                                4.83 kB │ gzip:     4.31 kB
+│   │   ├── claude3_7-CPbaIE2D.png                                5.98 kB │ gzip:     6.01 kB
+│   │   ├── index-Ba_qlnl_.css                                   18.80 kB │ gzip:     4.72 kB
+│   │   ├── index-D5xHVAf7.js                                   208.24 kB │ gzip:    74.78 kB
+│   │   ├── index-D5xHVAf7.js.map                               565.03 kB │ gzip:   159.59 kB
+│   │   ├── index-f49Dk-TT.js                                   330.24 kB │ gzip:    99.33 kB
+│   │   ├── index-f49Dk-TT.js.map                              1401.68 kB │ gzip:   297.34 kB
+│   │   ├── luma-DfNJhya8.png                                   169.92 kB │ gzip:   154.67 kB
+│   │   ├── react-BRTw4jLb.js                                    32.78 kB │ gzip:    10.54 kB
+│   │   ├── react-BRTw4jLb.js.map                               112.04 kB │ gzip:    28.12 kB
+│   │   ├── tanstack-B00gFvJH.js                                172.93 kB │ gzip:    53.27 kB
+│   │   ├── tanstack-B00gFvJH.js.map                            733.60 kB │ gzip:   186.07 kB
 │   │   └── tanstack-router-Q5CIJCHp.png                         10.38 kB │ gzip:    10.43 kB
 │   ├── favicon.ico                                             252.71 kB │ gzip:    18.97 kB
-│   ├── index.html                                                 .83 kB │ gzip:      .44 kB
+│   ├── index.html                                                 .83 kB │ gzip:      .43 kB
 │   └── robots.txt                                                 .06 kB │ gzip:      .08 kB
 ├── server
 │   ├── api
-│   │   ├── api.d.ts                                               .29 kB │ gzip:      .19 kB
-│   │   └── api.js                                                2.94 kB │ gzip:     1.09 kB
+│   │   ├── api.d.ts                                               .35 kB │ gzip:      .20 kB
+│   │   ├── api.js                                                8.85 kB │ gzip:     2.87 kB
+│   │   └── utils
+│   │       ├── parsing.d.ts                                       .23 kB │ gzip:      .17 kB
+│   │       └── parsing.js                                        2.03 kB │ gzip:      .82 kB
 │   ├── assets
-│   │   └── index-mRUUC8Wn.js                                    68.83 kB │ gzip:    18.52 kB
+│   │   └── index-DbHRN-SX.js                                   133.88 kB │ gzip:    49.45 kB
 │   ├── entry-server.js                                           7.10 kB │ gzip:     2.35 kB
 │   ├── favicon.ico                                             252.71 kB │ gzip:    18.97 kB
-│   ├── package.json                                              2.95 kB │ gzip:     1.08 kB
+│   ├── package.json                                              3.08 kB │ gzip:     1.13 kB
 │   ├── robots.txt                                                 .06 kB │ gzip:      .08 kB
 │   ├── server.d.ts                                                .34 kB │ gzip:      .21 kB
-│   ├── server.js                                                 5.21 kB │ gzip:     2.04 kB
-│   ├── tsconfig.node.tsbuildinfo                               120.13 kB │ gzip:    35.57 kB
+│   ├── server.js                                                 5.15 kB │ gzip:     2.03 kB
+│   ├── tsconfig.node.tsbuildinfo                               139.27 kB │ gzip:    40.23 kB
 │   ├── vite.config.d.ts                                           .08 kB │ gzip:      .10 kB
 │   ├── vite.config.js                                            2.58 kB │ gzip:      .83 kB
 │   └── yarn.lock                                                    0 kB │ gzip:      .02 kB
 └── server-deps
     └── nodejs
-        ├── package.json                                          2.95 kB │ gzip:     1.08 kB
+        ├── package.json                                          3.08 kB │ gzip:     1.13 kB
         └── yarn.lock                                                0 kB │ gzip:      .02 kB
 
-8 directories, 34 files
+9 directories, 39 files
 ```
 
 - `client/` is directly served as shown from s3 through cloudfront
