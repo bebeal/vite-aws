@@ -38,6 +38,7 @@ Template for a A web server application deployed with a cost-effective scalable 
 
 ## Other Libraries
 
+* [vitest](https://vitest.dev/guide/)
 * [nodemon](https://github.com/remy/nodemon)
 * [tsx](https://github.com/privatenumber/tsx)
 * [dotenv](https://github.com/motdotla/dotenv?tab=readme-ov-file)

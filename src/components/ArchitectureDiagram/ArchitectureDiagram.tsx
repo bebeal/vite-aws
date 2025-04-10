@@ -14,6 +14,7 @@ import S3Icon from '../../assets/icons/s3.svg';
 import TailwindIcon from '../../assets/icons/tailwind.svg';
 import TypeScriptIcon from '../../assets/icons/typescript.svg';
 import ViteIcon from '../../assets/icons/vite.svg';
+import VitestIcon from '../../assets/icons/vitest.svg';
 import WebIcon from '../../assets/icons/web.svg';
 import YarnIcon from '../../assets/icons/yarn.svg';
 import RadixImage from '../../assets/images/radix.png';
@@ -62,9 +63,10 @@ const DevToolsBox = () => (
       <ToolBox icon={<YarnIcon className='w-5 h-5' />} name='Yarn' description='Package Manager' />
       <ToolBox icon={<ESLintIcon className='w-5 h-5' />} name='ESLint' description='Linter' />
     </div>
-    <div className='col-span-3 gap-1 grid grid-cols-2'>
+    <div className='col-span-3 gap-1 flex justify-center'>
       <ToolBox icon={<TypeScriptIcon className='w-5 h-5' />} name='TypeScript' description='Language' />
       <ToolBox icon={<PrettierIcon className='w-5 h-5' />} name='Prettier' description='Formatter' />
+      <ToolBox icon={<VitestIcon className='w-5 h-5' />} name='Vitest' description='Testing' />
     </div>
   </div>
 );
@@ -143,7 +145,7 @@ export const ArchitectureDiagram = () => {
   const [positions, setPositions] = React.useState<PositionsState>({});
   const svgRef = React.useRef<SVGSVGElement | null>(null);
   const componentsRef = React.useRef<Map<string, HTMLElement>>(new Map());
-  const [selectedModelId, setSelectedModelId] = React.useState<string>('anthropic.claude-3-sonnet-20240229-v1:0');
+  const [selectedModelId, setSelectedModelId] = React.useState<string>('deepseek.r1-v1:0');
 
   // Update component positions
   const updatePosition = React.useCallback((id: string, rect: DOMRect, element: HTMLElement): void => {

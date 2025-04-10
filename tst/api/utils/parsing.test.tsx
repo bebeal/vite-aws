@@ -1,7 +1,7 @@
 // tst/utils/parsing.test.tsx
 
 import { describe, it, expect } from 'vitest';
-import { parseTagContent } from '../../src/utils/parsing';
+import { parseTagContent } from '../../../api/utils/parsing';
 
 describe('parseTagContent', () => {
   it('extracts content from tags and preserves leftover text', () => {

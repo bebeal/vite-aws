@@ -3,8 +3,8 @@ import { Cors, LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { AnyPrincipal, Effect, PolicyDocument, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture, Code, Function, LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
-import path from 'path';
 import * as dotenv from 'dotenv';
+import path from 'path';
 
 interface ApiStackProps extends StackProps {
 

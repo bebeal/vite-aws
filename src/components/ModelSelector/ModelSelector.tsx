@@ -1,5 +1,6 @@
 import { FoundationModelSummary } from '@aws-sdk/client-bedrock';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useQuery } from '@tanstack/react-query';
 import React, { SVGProps, useState } from 'react';
 import AmazonIcon from '../../assets/icons/amazon.svg';
 import AnthropicIcon from '../../assets/icons/anthropic.svg';
@@ -12,9 +13,8 @@ import StabilityAI from '../../assets/icons/stability.svg';
 import Ai21Image from '../../assets/images/ai21labs.jpeg';
 import Claude37SonnetImage from '../../assets/images/claude3_7.png';
 import LumaImage from '../../assets/images/luma.png';
-import { ServiceBox } from '../ServiceBox/ServiceBox';
 import { Loader } from '../Loader/Loader';
-import { useQuery } from '@tanstack/react-query';
+import { ServiceBox } from '../ServiceBox/ServiceBox';
 // model icons
 const Claude37SonnetIcon = (props: React.HTMLAttributes<HTMLImageElement>) => <img src={Claude37SonnetImage} alt='claude37sonnet' {...props} />;
 
@@ -38,7 +38,6 @@ const providerIcons = {
 
 const modelIcons = {
   'anthropic.claude-3-7-sonnet-20250219-v1:0': <Claude37SonnetIcon className='w-3 h-3 object-contain' style={{ marginTop: '-1px' }} />,
-  'anthropic.claude-3-5-haiku-20241022-v1:0': <Claude37SonnetIcon className='w-3 h-3 object-contain' style={{ marginTop: '-1px' }} />,
   'deepseek.r1-v1:0': <DeepSeekIcon className='w-3 h-3' />,
 } as const;
 
@@ -47,19 +46,22 @@ type ModelId = keyof typeof modelIcons;
 const DefaultModels = [
   {
     customizationsSupported: [],
-    inferenceTypesSupported: ['ON_DEMAND'],
-    inputModalities: ['TEXT', 'IMAGE'],
-    modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0',
-    modelId: 'anthropic.claude-3-5-haiku-20241022-v1:0',
+    inferenceTypesSupported: [
+      'INFERENCE_PROFILE',
+      // for some this is not a valid InferenceType but it's the output of list foundation models so ¯\_(ツ)_/¯
+    ] as unknown as FoundationModelSummary['inferenceTypesSupported'],
+    inputModalities: ['TEXT'],
+    modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/deepseek.r1-v1:0',
+    modelId: 'deepseek.r1-v1:0',
     modelLifecycle: {
       status: 'ACTIVE',
     },
-    modelName: 'Claude 3.5 Haiku',
+    modelName: 'DeepSeek-R1',
     outputModalities: ['TEXT'],
-    providerName: 'Anthropic',
+    providerName: 'DeepSeek',
     responseStreamingSupported: true,
   },
-] as FoundationModelSummary[];
+] satisfies FoundationModelSummary[];
 
 // Update ModelNameWithIcon to fix icon positioning
 const ModelNameWithIcon = ({ modelId, name }: { modelId: ModelId; name: string }) => {

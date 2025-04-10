@@ -1,9 +1,9 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
 import consolePrefix from '@bebeal/console-prefix-plugin';
+import tailwindcss from '@tailwindcss/vite';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+import react from '@vitejs/plugin-react';
 import { defineConfig, UserConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig((options) => {
