@@ -14,7 +14,7 @@ A web server application template with a cost-effective scalable AWS architectur
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
 <kbd>
-  <img src="https://github.com/user-attachments/assets/54884241-e2e6-4385-a646-7e2c556cf2ba" alt="Image" />
+  <img src="https://github.com/user-attachments/assets/a3bd4727-654b-4356-84a3-8c2e87b2fd6e" alt="Image" />
 </kbd></div>
 
 ## Features
@@ -83,6 +83,7 @@ yarn build:client // build the client side to dist/client
 yarn build:server // build the server side to dist/server
 yarn lint         // run eslint
 yarn format       // run prettier
+yarn test         // run tests
 ```
 
 ## CDK
