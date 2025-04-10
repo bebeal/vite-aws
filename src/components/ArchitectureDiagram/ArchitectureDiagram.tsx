@@ -58,12 +58,12 @@ const RepoBox = () => (
 
 const DevToolsBox = () => (
   <div className='border border-gray-400 dark:border-gray-600 rounded-lg p-2 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm transition-all flex flex-col gap-1'>
-    <div className='col-span-3 gap-1 flex justify-center'>
+    <div className='grid grid-cols-3 gap-1'>
       <ToolBox icon={<ViteIcon className='w-5 h-5' />} name='Vite' description='Build Tool' />
       <ToolBox icon={<YarnIcon className='w-5 h-5' />} name='Yarn' description='Package Manager' />
       <ToolBox icon={<ESLintIcon className='w-5 h-5' />} name='ESLint' description='Linter' />
     </div>
-    <div className='col-span-3 gap-1 flex justify-center'>
+    <div className='grid grid-cols-3 gap-1'>
       <ToolBox icon={<TypeScriptIcon className='w-5 h-5' />} name='TypeScript' description='Language' />
       <ToolBox icon={<PrettierIcon className='w-5 h-5' />} name='Prettier' description='Formatter' />
       <ToolBox icon={<VitestIcon className='w-5 h-5' />} name='Vitest' description='Testing' />
