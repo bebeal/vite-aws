@@ -43,7 +43,7 @@ const modelIcons = {
 
 type ModelId = keyof typeof modelIcons;
 
-const DefaultModels = [
+export const DefaultModels = [
   {
     customizationsSupported: [],
     inferenceTypesSupported: [
@@ -63,7 +63,6 @@ const DefaultModels = [
   },
 ] satisfies FoundationModelSummary[];
 
-// Update ModelNameWithIcon to fix icon positioning
 const ModelNameWithIcon = ({ modelId, name }: { modelId: ModelId; name: string }) => {
   if (modelId in modelIcons) {
     // Extract first word to show icon before it
@@ -88,7 +87,14 @@ const isModelId = (id: string): id is ModelId => id in modelIcons;
 // Create a ProviderIcon component to properly render the icons
 const ProviderIcon = ({ providerName, className }: { providerName: string; className?: string }) => {
   const IconComponent = providerIcons[providerName as keyof typeof providerIcons];
-  if (!IconComponent) return <div className={className} />;
+  if (!IconComponent) {
+    // Simple placeholder for non-existent providers
+    return (
+      <div className={`${className} bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center`}>
+        <div className='w-1/2 h-1/2 text-gray-500 dark:text-gray-400 flex items-center justify-center'>?</div>
+      </div>
+    );
+  }
 
   return <IconComponent className={className} />;
 };

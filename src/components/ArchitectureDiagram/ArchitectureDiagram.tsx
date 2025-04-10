@@ -22,6 +22,7 @@ import TanStackRouterImage from '../../assets/images/tanstack-router.png';
 import { FortuneTeller } from '../FortuneTeller/FortuneTeller';
 import { ModelSelector } from '../ModelSelector';
 import { ServiceBox } from '../ServiceBox';
+import { DefaultModels } from '../ModelSelector/ModelSelector';
 
 const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterImage} alt='TanStack' {...props} />);
 const RadixIconComponent = memo((props: HTMLProps<HTMLImageElement>) => <img src={RadixImage} alt='Radix' {...props} />);
@@ -145,7 +146,7 @@ export const ArchitectureDiagram = () => {
   const [positions, setPositions] = React.useState<PositionsState>({});
   const svgRef = React.useRef<SVGSVGElement | null>(null);
   const componentsRef = React.useRef<Map<string, HTMLElement>>(new Map());
-  const [selectedModelId, setSelectedModelId] = React.useState<string>('deepseek.r1-v1:0');
+  const [selectedModelId, setSelectedModelId] = React.useState<string>(DefaultModels[0].modelId);
 
   // Update component positions
   const updatePosition = React.useCallback((id: string, rect: DOMRect, element: HTMLElement): void => {
