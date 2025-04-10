@@ -1532,7 +1532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:*, @eslint/js@npm:9.24.0, @eslint/js@npm:^9.24.0":
+"@eslint/js@npm:9.24.0, @eslint/js@npm:^9.24.0":
   version: 9.24.0
   resolution: "@eslint/js@npm:9.24.0"
   checksum: 10c0/efe22e29469e4140ac3e2916be8143b1bcfd1084a6edf692b7a58a3e54949d53c67f7f979bc0a811db134d9cc1e7bff8aa71ef1376b47eecd7e226b71206bb36
@@ -4175,15 +4175,6 @@ __metadata:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
   checksum: 10c0/69ba24fee600d1e4c5abe0df086c1a4d798abf13792d8cfab912d76817fe1a894359a1518557d21237fbaf6eda93c5ab9309143dee4c59ef54336d1b3570420e
-  languageName: node
-  linkType: hard
-
-"@types/eslint__js@npm:^9.14.0":
-  version: 9.14.0
-  resolution: "@types/eslint__js@npm:9.14.0"
-  dependencies:
-    "@eslint/js": "npm:*"
-  checksum: 10c0/da5e315aaf17a3e038eff3a4e1b90e360d9d22319653f43f746ad4b7f90dca2d1f8e0ea08f4d02b1b426e7baeb15610be4a30b64d28d16ef06d2feb75c549dc1
   languageName: node
   linkType: hard
 
@@ -10498,7 +10489,6 @@ __metadata:
     "@tanstack/router-plugin": "npm:^1.115.2"
     "@types/compression": "npm:^1.7.5"
     "@types/eslint": "npm:^9.6.1"
-    "@types/eslint__js": "npm:^9.14.0"
     "@types/express": "npm:^5.0.1"
     "@types/node": "npm:^22.14.0"
     "@types/react": "npm:^19.1.0"

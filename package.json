@@ -57,7 +57,6 @@
     "@tanstack/router-plugin": "^1.115.2",
     "@types/compression": "^1.7.5",
     "@types/eslint": "^9.6.1",
-    "@types/eslint__js": "^9.14.0",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",

@@ -48,7 +48,7 @@ const DefaultModels = [
     customizationsSupported: [],
     inferenceTypesSupported: [
       'INFERENCE_PROFILE',
-      // for some this is not a valid InferenceType but it's the output of list foundation models so ¯\_(ツ)_/¯
+      // for some reason this is not a valid InferenceType but it's the output of list foundation models so ¯\_(ツ)_/¯
     ] as unknown as FoundationModelSummary['inferenceTypesSupported'],
     inputModalities: ['TEXT'],
     modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/deepseek.r1-v1:0',

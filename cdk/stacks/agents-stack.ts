@@ -6,5 +6,6 @@ export class AgentsStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
     // Well I used to have an agent defined here but then I switched the code to rely on InvokeModel instead so now this is just an empty stack
+    // leaving it here with the intent to use it in the future
   }
 };
