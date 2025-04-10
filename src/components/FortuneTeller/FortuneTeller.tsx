@@ -1,9 +1,19 @@
-import { Loader } from '../Loader/Loader';
 import { useMutation } from '@tanstack/react-query';
+import { Loader } from '../Loader/Loader';
 
-export const FortuneTeller = () => {
+interface FortuneTellerProps {
+  modelId?: string;
+}
+
+export const FortuneTeller: React.FC<FortuneTellerProps> = ({ modelId }) => {
   const fetchFortune = async () => {
-    const response = await fetch('/api/fortune');
+    const response = await fetch('/api/fortune', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ modelId }),
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch fortune');
     }
@@ -42,7 +52,7 @@ export const FortuneTeller = () => {
                 <span>{displayText}</span>
               ) : (
                 <span className='inline-flex items-center'>
-                  🥠<span className='mx-1'>{displayText.replace(/🥠/g, '')}</span>🥠
+                  🥠<span className='mx-1'>{displayText.replace(/🥠/g, '').replace(/"/g, '')}</span>🥠
                 </span>
               )}
             </p>

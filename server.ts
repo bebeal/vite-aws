@@ -67,11 +67,10 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
   }
 
   // inject api router
-  app.use('/api', api.router);
+  app.use('/api', express.json(), api.router);
   serverLog('API routes:', api.listRoutes());
 
   const environment = vite?.environments.ssr;
-  serverLog('Server environment:', environment?.mode, environment?.name);
 
   // serve index.html from parent server for all non-file requests
   app.use('*', async (req, res, next) => {

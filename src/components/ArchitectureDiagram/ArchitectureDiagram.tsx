@@ -1,5 +1,4 @@
-import React, { ComponentType, HTMLProps, JSX, memo } from 'react';
-import AnthropicIcon from '../../assets/icons/anthropic.svg';
+import React, { HTMLProps, JSX, memo, ReactNode } from 'react';
 import APIGatewayIcon from '../../assets/icons/apigateway.svg';
 import BedrockIcon from '../../assets/icons/bedrock.svg';
 import CDKIcon from '../../assets/icons/cdk.svg';
@@ -17,39 +16,27 @@ import TypeScriptIcon from '../../assets/icons/typescript.svg';
 import ViteIcon from '../../assets/icons/vite.svg';
 import WebIcon from '../../assets/icons/web.svg';
 import YarnIcon from '../../assets/icons/yarn.svg';
-import ClaudeIcon from '../../assets/images/claude3_7.png';
-import TanStackRouterIcon from '../../assets/images/tanstack-router.png';
+import RadixImage from '../../assets/images/radix.png';
+import TanStackRouterImage from '../../assets/images/tanstack-router.png';
 import { FortuneTeller } from '../FortuneTeller/FortuneTeller';
+import { ModelSelector } from '../ModelSelector';
+import { ServiceBox } from '../ServiceBox';
 
-const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterIcon} {...props} />);
-const Claude37Icon = memo((props: HTMLProps<HTMLImageElement>) => <img src={ClaudeIcon} {...props} />);
+const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterImage} alt='TanStack' {...props} />);
+const RadixIconComponent = memo((props: HTMLProps<HTMLImageElement>) => <img src={RadixImage} alt='Radix' {...props} />);
 
-const ToolBox = ({ icon: Icon, name, description }: { icon: ComponentType<{ className?: string }>; name: string; description: string }) => {
+interface ToolBoxProps {
+  icon: ReactNode;
+  name: string;
+  description: string;
+}
+
+const ToolBox = ({ icon, name, description }: ToolBoxProps) => {
   return (
     <div className='bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-1.5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-600 gap-1'>
-      <Icon className='w-5 h-5' />
+      <div className='w-5 h-5 rounded-sm overflow-hidden'>{icon}</div>
       <span className='mt-0.5 text-[11px] text-gray-800 dark:text-gray-200 text-center'>{name}</span>
       <span className='text-[9px] text-gray-600 dark:text-gray-400 text-center'>{description}</span>
-    </div>
-  );
-};
-
-const ServiceBox = ({ icon: Icon, name, description, className }: { icon: ComponentType<{ className?: string }>; name: string; description: ReactNode; className?: string }) => {
-  const borderStyles = className?.includes('border') ? '' : 'border-2 border-gray-400 dark:border-gray-600';
-  return (
-    <div className={`relative bg-gray-200 dark:bg-[#2a2a2a] rounded-lg p-3 flex flex-col items-center w-[140px] justify-center shrink-0 border ${borderStyles} ${className}`}>
-      <Icon className='w-12 h-12' />
-      <span className='mt-2 text-sm font-bold text-gray-800 dark:text-gray-200'>{name}</span>
-      <span className='text-xs text-gray-600 dark:text-gray-400 text-center font-bold'>
-        {typeof description === 'string'
-          ? description.split(' ').map((word, index) => (
-              <span key={index}>
-                {word} {index === 0 && <br />}
-              </span>
-            ))
-          : description
-        }
-      </span>
     </div>
   );
 };
@@ -71,25 +58,30 @@ const RepoBox = () => (
 const DevToolsBox = () => (
   <div className='border border-gray-400 dark:border-gray-600 rounded-lg p-2 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm transition-all flex flex-col gap-1'>
     <div className='col-span-3 gap-1 flex justify-center'>
-      <ToolBox icon={ViteIcon} name='Vite' description='Build Tool' />
-      <ToolBox icon={YarnIcon} name='Yarn' description='Package Manager' />
-      <ToolBox icon={ESLintIcon} name='ESLint' description='Linter' />
+      <ToolBox icon={<ViteIcon className='w-5 h-5' />} name='Vite' description='Build Tool' />
+      <ToolBox icon={<YarnIcon className='w-5 h-5' />} name='Yarn' description='Package Manager' />
+      <ToolBox icon={<ESLintIcon className='w-5 h-5' />} name='ESLint' description='Linter' />
     </div>
-    <div className='col-span-3 gap-1 flex justify-center'>
-      <ToolBox icon={TypeScriptIcon} name='TypeScript' description='Language' />
-      <ToolBox icon={PrettierIcon} name='Prettier' description='Formatter' />
+    <div className='col-span-3 gap-1 grid grid-cols-2'>
+      <ToolBox icon={<TypeScriptIcon className='w-5 h-5' />} name='TypeScript' description='Language' />
+      <ToolBox icon={<PrettierIcon className='w-5 h-5' />} name='Prettier' description='Formatter' />
     </div>
   </div>
 );
 
 const ClientToolsBox = () => (
-  <div className='flex items-center justify-center z-10 w-[140px] h-[130px]'>
+  <div className='flex items-center justify-center z-10 w-[140px] h-[160px]'>
     <div className='border-2 border-cyan-500 rounded-lg p-1 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm z-10'>
-      <div className='grid grid-cols-2 gap-1'>
-        <ToolBox icon={ReactIcon} name='React' description='Virtual DOM' />
-        <ToolBox icon={TanStackIcon} name='TanStack' description='Router & Queries' />
-        <ToolBox icon={NodeIcon} name='Node' description='Runtime' />
-        <ToolBox icon={TailwindIcon} name='Tailwind' description='CSS' />
+      <div className='flex flex-col gap-1'>
+        <div className='grid grid-cols-2 gap-1'>
+          <ToolBox icon={<ReactIcon className='w-5 h-5' />} name='React' description='Virtual DOM' />
+          <ToolBox icon={<TanStackIcon className='w-5 h-5' />} name='TanStack' description='Router & Queries' />
+          <ToolBox icon={<NodeIcon className='w-5 h-5' />} name='Node' description='Runtime' />
+          <ToolBox icon={<TailwindIcon className='w-5 h-5' />} name='Tailwind' description='CSS' />
+        </div>
+        <div className='grid grid-cols-1 gap-1'>
+          <ToolBox icon={<RadixIconComponent className='w-5 h-5' />} name='Radix' description='UI Components' />
+        </div>
       </div>
     </div>
   </div>
@@ -151,6 +143,7 @@ export const ArchitectureDiagram = () => {
   const [positions, setPositions] = React.useState<PositionsState>({});
   const svgRef = React.useRef<SVGSVGElement | null>(null);
   const componentsRef = React.useRef<Map<string, HTMLElement>>(new Map());
+  const [selectedModelId, setSelectedModelId] = React.useState<string>('anthropic.claude-3-sonnet-20240229-v1:0');
 
   // Update component positions
   const updatePosition = React.useCallback((id: string, rect: DOMRect, element: HTMLElement): void => {
@@ -331,14 +324,14 @@ export const ArchitectureDiagram = () => {
       );
     }
 
-    if (positions.claude && positions.bedrock) {
-      const startX = positions.claude.right - svgRect.left;
-      const startY = positions.claude.top + positions.claude.height / 2 - svgRect.top;
+    if (positions.modelSelector && positions.bedrock) {
+      const startX = positions.modelSelector.right - svgRect.left;
+      const startY = positions.modelSelector.top + positions.modelSelector.height / 2 - svgRect.top;
       const endX = positions.bedrock.left - svgRect.left;
       const endY = positions.bedrock.top + positions.bedrock.height / 2 - svgRect.top;
-      
+
       routes.push(
-        <g key='claude-bedrock'>
+        <g key='modelSelector-bedrock'>
           <path d={`M ${endX},${endY} L ${startX},${startY}`} stroke='#00b8db' strokeWidth='2' fill='none' markerEnd='url(#arrowhead)' />
         </g>,
       );
@@ -383,7 +376,7 @@ export const ArchitectureDiagram = () => {
               <div className='col-span-2 flex flex-col items-center'>
                 <div className='mt-[18px]'>
                   <ComponentBox id='client' onPositionUpdate={updatePosition} className='relative z-10'>
-                    <ServiceBox icon={WebIcon} name='Web' description='Client Browser' className='border-2 border-cyan-500 dark:border-cyan-500' />
+                    <ServiceBox icon={<WebIcon className='w-12 h-12' />} name='Web' description='Client Browser' className='border-2 border-cyan-500 dark:border-cyan-500' />
                   </ComponentBox>
                 </div>
                 <div className='mt-10'>
@@ -401,11 +394,11 @@ export const ArchitectureDiagram = () => {
                   <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-static</div>
                   <div className='grid grid-cols-2 justify-items-center'>
                     <ComponentBox id='cloudfront' onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={CloudFrontIcon} name='CloudFront' description='Content Delivery' />
+                      <ServiceBox icon={<CloudFrontIcon className='w-12 h-12' />} name='CloudFront' description='Content Delivery' />
                     </ComponentBox>
 
                     <ComponentBox id='s3' onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={S3Icon} name='S3' description='Static Assets' />
+                      <ServiceBox icon={<S3Icon className='w-12 h-12' />} name='S3' description='Static Assets' />
                     </ComponentBox>
                   </div>
                 </div>
@@ -415,15 +408,15 @@ export const ArchitectureDiagram = () => {
                   <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-api</div>
                   <div className='grid grid-cols-3 justify-items-center'>
                     <ComponentBox id='apigateway' onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={APIGatewayIcon} name='API Gateway' description='REST API' />
+                      <ServiceBox icon={<APIGatewayIcon className='w-12 h-12' />} name='API Gateway' description='REST API' />
                     </ComponentBox>
 
                     <ComponentBox id='lambda' onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={LambdaIcon} name='Lambda' description='Serverless Compute' />
+                      <ServiceBox icon={<LambdaIcon className='w-12 h-12' />} name='Lambda' description='Serverless Compute' />
                     </ComponentBox>
 
                     <ComponentBox id='express' onPositionUpdate={updatePosition}>
-                      <ServiceBox icon={ExpressIcon} name='Express' description='API Router' />
+                      <ServiceBox icon={<ExpressIcon className='w-12 h-12' />} name='Express' description='API Router' />
                     </ComponentBox>
                   </div>
                 </div>
@@ -432,7 +425,7 @@ export const ArchitectureDiagram = () => {
               {/* CDK box */}
               <div className='col-span-2 flex items-center justify-center'>
                 <ComponentBox id='cdk' onPositionUpdate={updatePosition} className='relative'>
-                  <ServiceBox icon={CDKIcon} name='CDK' description='Infrastructure as Code' className='border-2 border-pink-500 dark:border-pink-500' />
+                  <ServiceBox icon={<CDKIcon className='w-12 h-12' />} name='CDK' description='Infrastructure as Code' className='border-2 border-pink-500 dark:border-pink-500' />
                 </ComponentBox>
               </div>
             </div>
@@ -444,26 +437,27 @@ export const ArchitectureDiagram = () => {
               <div className='absolute -top-3 left-4 bg-gray-100 dark:bg-[#1a1a1a] px-2 text-xs text-pink-500 font-medium'>vite-aws-agents</div>
               <div className='flex justify-center gap-30 grid-cols-3 w-full'>
                 <div className='flex items-center gap-4'>
-                  <ComponentBox id='claude' onPositionUpdate={updatePosition}>
-                  <ServiceBox
-                    icon={AnthropicIcon}
-                    name='Anthropic'
-                    description={
-                    <div className='flex items-center gap-px justify-center text-center'>
-                      <span className="">
-                        <Claude37Icon className="w-3 h-3 inline-block self-center object-contain" /> Claude 3.7 Sonnet
-                      </span>
-                    </div>}
-                  />
-                </ComponentBox>
-                <ComponentBox id='bedrock' onPositionUpdate={updatePosition}>
-                  <ServiceBox icon={BedrockIcon} name='Bedrock' description='AI Agent' />
-                </ComponentBox>
+                  {/* Model Selector */}
+                  <ComponentBox id='modelSelector' onPositionUpdate={updatePosition}>
+                    <ModelSelector onModelSelect={setSelectedModelId} />
+                  </ComponentBox>
+                  <ComponentBox id='bedrock' onPositionUpdate={updatePosition}>
+                    <ServiceBox
+                      icon={<BedrockIcon className='w-12 h-12' />}
+                      name='Bedrock'
+                      description={
+                        <span className='text-xs text-gray-600 dark:text-gray-400 text-center'>
+                          AI Agents
+                          <br />& Models
+                        </span>
+                      }
+                    />
+                  </ComponentBox>
                 </div>
 
                 {/* Fortune teller */}
                 <ComponentBox id='fortuneTeller' onPositionUpdate={updatePosition} className='flex items-center'>
-                  <FortuneTeller />
+                  <FortuneTeller modelId={selectedModelId} />
                 </ComponentBox>
               </div>
             </div>

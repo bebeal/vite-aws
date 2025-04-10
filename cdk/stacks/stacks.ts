@@ -15,9 +15,6 @@ export const makeStacks = (app: App) => {
     env: {
       region: process.env.AWS_REGION || 'us-west-2'
     },
-    fortuneAgent: agentsStack.fortuneAgent,
-    fortuneAgentAlias: agentsStack.fortuneAgentAlias,
-    agentRole: agentsStack.agentRole,
   });
 
   const staticStack = new StaticStack(app, 'vite-aws-static', {

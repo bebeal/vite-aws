@@ -1,15 +1,13 @@
 import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Cors, LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
-import { CfnAgent, CfnAgentAlias,  } from 'aws-cdk-lib/aws-bedrock';
-import { AnyPrincipal, Effect, PolicyDocument, PolicyStatement, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { AnyPrincipal, Effect, PolicyDocument, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture, Code, Function, LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import path from 'path';
+import * as dotenv from 'dotenv';
 
 interface ApiStackProps extends StackProps {
-  fortuneAgent: CfnAgent;
-  fortuneAgentAlias: CfnAgentAlias;
-  agentRole: Role;
+
 }
 
 export class ApiStack extends Stack {
@@ -31,9 +29,12 @@ export class ApiStack extends Stack {
       code: Code.fromAsset(path.resolve('dist/server')),
       layers: [serverDepsLayer],
       environment: {
+        // ignore AWS_ variables as they are reserved for AWS
+        ...Object.fromEntries(
+          Object.entries(dotenv.config().parsed || {})
+            .filter(([key]) => !key.startsWith('AWS_'))
+        ),
         NODE_ENV: 'production',
-        FORTUNE_AGENT_ID: props?.fortuneAgent.attrAgentId || '',
-        FORTUNE_AGENT_ALIAS_ID: props?.fortuneAgentAlias.attrAgentAliasId || '',
       },
       timeout: Duration.seconds(30),
       memorySize: 1024,
@@ -50,13 +51,6 @@ export class ApiStack extends Stack {
             'bedrock:InvokeAgentWithResponseStream'
           ],
           resources: ['*'],
-        }),
-        new PolicyStatement({
-          effect: Effect.ALLOW,
-          actions: [
-            'iam:PassRole'
-          ],
-          resources: [props?.agentRole.roleArn || ''],
         }),
       ],
     });
