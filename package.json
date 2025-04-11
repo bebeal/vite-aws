@@ -11,7 +11,7 @@
     "url": "https://github.com/bebeal/vite-aws/issues"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:client && yarn build:server && yarn postbuild && yarn build:cdk",
+    "build": "yarn clean && NODE_ENV=production yarn build:client && yarn build:server && yarn postbuild && yarn build:cdk",
     "build:client": "tsc && vite build",
     "build:server": "tsc -p tsconfig.node.json && vite build --ssr src/entry-server.tsx",
     "build:cdk": "CDK_OUTDIR=cdk.out tsx cdk/cdk.ts",
@@ -77,6 +77,7 @@
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "8.29.1",
+    "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.1.1"
   },
