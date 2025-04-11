@@ -87,8 +87,7 @@ export class StaticStack extends Stack {
       'BY', // Belarus
     ];
 
-    // Create CloudFront distribution with price class set to US and EU only
-    // and geo-restrictions to block high-threat countries
+    // Create CloudFront distribution
     const distribution = new Distribution(this, 'vite-aws-distribution', {
       ...(certificate && domainNames ? { domainNames, certificate } : {}),
       defaultBehavior: {
@@ -141,7 +140,7 @@ export class StaticStack extends Stack {
     // Output the CloudFront URL
     new CfnOutput(this, 'vite-aws-url', {
       value: distribution.distributionDomainName,
-      description: 'vite-aws cloudfront distribution URL (US and EU pricing tier, restricted countries blocked)',
+      description: 'vite-aws cloudfront distribution URL',
     });
   }
 }
