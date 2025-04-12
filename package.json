@@ -26,10 +26,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock": "^3.784.0",
-    "@aws-sdk/client-bedrock-agent": "^3.782.0",
-    "@aws-sdk/client-bedrock-agent-runtime": "^3.782.0",
-    "@aws-sdk/client-bedrock-runtime": "^3.785.0",
+    "@aws-sdk/client-bedrock": "^3.787.0",
+    "@aws-sdk/client-bedrock-agent": "^3.787.0",
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.787.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.787.0",
     "@tanstack/react-query": "^5.72.2",
     "@tanstack/react-router": "^1.115.2",
     "@tanstack/react-start": "^1.115.2",
@@ -42,7 +42,7 @@
     "serve-static": "^2.2.0",
     "serverless-http": "^3.2.0",
     "source-map-support": "^0.5.21",
-    "vite": "^6.2.5"
+    "vite": "^6.2.6"
   },
   "devDependencies": {
     "@bebeal/console-prefix-plugin": "^0.1.3",

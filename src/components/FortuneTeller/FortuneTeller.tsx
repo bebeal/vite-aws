@@ -38,16 +38,16 @@ export const FortuneTeller: React.FC<FortuneTellerProps> = ({ modelId }) => {
       <button
         onClick={() => mutate()}
         disabled={isPending}
-        className='h-10 flex-shrink-0 px-4 py-2 min-w-37 text-sm font-medium text-white bg-[#1a1a1a] rounded-md hover:bg-[#222222] disabled:bg-[#1a1a1a] disabled:cursor-not-allowed cursor-pointer border border-gray-600 hover:border-purple-500 flex items-center justify-center gap-2 peer'
+        className='h-10 flex-shrink-0 px-4 py-2 min-w-37 text-sm font-medium dark:text-white dark:bg-[#1a1a1a] rounded-md dark:hover:bg-[#222222] dark:disabled:bg-[#1a1a1a] disabled:cursor-not-allowed cursor-pointer border border-gray-400 dark:border-gray-600 hover:border-purple-500 flex items-center justify-center gap-2 peer'
       >
         {isPending ? <Loader /> : <>🔮 Get Fortune</>}
       </button>
 
       {displayText ? (
         <>
-          <div className='h-[1px] w-8 bg-gray-600 peer-hover:bg-purple-500'></div>
-          <div className='max-w-[300px] p-4 bg-[#1a1a1a] rounded-md shadow-lg text-sm border border-gray-600 peer-hover:border-purple-500'>
-            <p className={`text-gray-200 font-medium whitespace-normal text-xs text-center flex items-center justify-center ${error ? 'text-red-500' : ''}`}>
+          <div className='h-[1px] w-8 dark:bg-gray-600 peer-hover:bg-purple-500'></div>
+          <div className='max-w-[300px] p-4 dark:bg-[#1a1a1a] rounded-md shadow-lg text-sm border border-gray-400 dark:border-gray-600 peer-hover:border-purple-500'>
+            <p className={`dark:text-gray-200 font-medium whitespace-normal text-xs text-center flex items-center justify-center ${error ? 'text-red-500' : ''}`}>
               {error ? (
                 <span>{displayText}</span>
               ) : (
