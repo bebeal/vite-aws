@@ -4,7 +4,7 @@
 
 </div>
 
-Template for a A web server application deployed with a cost-effective scalable AWS architecture:
+Template for a web server application deployed with a cost-effective scalable AWS architecture:
 
 - Static content served via CloudFront distribution from S3
 - Serverless API endpoints using Lambda functions with Express routes for on-demand compute
