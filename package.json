@@ -42,7 +42,7 @@
     "serve-static": "^2.2.0",
     "serverless-http": "^3.2.0",
     "source-map-support": "^0.5.21",
-    "vite": "^6.2.6"
+    "vite": "^6.1.5"
   },
   "devDependencies": {
     "@bebeal/console-prefix-plugin": "^0.1.3",
