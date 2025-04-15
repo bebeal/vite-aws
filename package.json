@@ -42,7 +42,7 @@
     "serve-static": "^2.2.0",
     "serverless-http": "^3.2.0",
     "source-map-support": "^0.5.21",
-    "vite": "^6.2.6"
+    "vite": "^6.1.5"
   },
   "devDependencies": {
     "@bebeal/console-prefix-plugin": "^0.1.3",
@@ -65,7 +65,7 @@
     "@types/source-map-support": "^0.5.10",
     "@vitejs/plugin-react": "^4.3.4",
     "aws-cdk": "^2.1007.0",
-    "aws-cdk-lib": "^2.189.0",
+    "aws-cdk-lib": "^2.189.1",
     "constructs": "^10.4.2",
     "dotenv-cli": "^8.0.0",
     "eslint": "9.24.0",
