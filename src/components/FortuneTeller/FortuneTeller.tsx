@@ -59,7 +59,7 @@ export const FortuneTeller: React.FC<FortuneTellerProps> = ({ modelId }) => {
           </div>
         </>
       ) : (
-        <div className='w-[332px]' />
+        <div className='w-[330px]' />
       )}
     </div>
   );
