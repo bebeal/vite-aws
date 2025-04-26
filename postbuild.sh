@@ -4,10 +4,8 @@ set -e
 # Define magenta color prefix (ANSI color code 35 for magenta, 1 for bold)
 SERVER_DEPS_PREFIX="\033[1;35m[server-deps]\033[0m"
 
-# Lambda Code + Dependencies Packaging
-echo -e "$SERVER_DEPS_PREFIX ♻️  Preparing server dependencies..."
-
 # Copy over package, yarn config, and yarn lock file
+echo -e "$SERVER_DEPS_PREFIX ♻️  Preparing server dependencies..."
 cp package.json dist/server/
 cp .yarnrc.yml dist/server/
 touch dist/server/yarn.lock
