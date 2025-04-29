@@ -12,7 +12,7 @@ export interface RouterContext {
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => {
     return (
-      <div className='flex flex-col h-screen overflow-auto'>
+      <div className='flex flex-col h-full min-h-screen overflow-auto'>
         <Outlet />
         <ThemeToggle />
         <ReactQueryDevtools buttonPosition='bottom-right' />
