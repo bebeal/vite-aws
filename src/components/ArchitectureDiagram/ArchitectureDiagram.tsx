@@ -19,10 +19,9 @@ import WebIcon from '../../assets/icons/web.svg';
 import YarnIcon from '../../assets/icons/yarn.svg';
 import RadixImage from '../../assets/images/radix.png';
 import TanStackRouterImage from '../../assets/images/tanstack-router.png';
-import { FortuneTeller } from '../FortuneTeller/FortuneTeller';
-import { ModelSelector } from '../ModelSelector';
-import { ServiceBox } from '../ServiceBox';
-import { DefaultModels } from '../ModelSelector/ModelSelector';
+import { FortuneTeller } from './FortuneTeller';
+import { ModelSelector, DefaultModels } from './ModelSelector';
+import { ServiceBox } from './ServiceBox';
 
 const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterImage} alt='TanStack' {...props} />);
 const RadixIconComponent = memo((props: HTMLProps<HTMLImageElement>) => <img src={RadixImage} alt='Radix' {...props} />);

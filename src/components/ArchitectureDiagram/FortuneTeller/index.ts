@@ -1,0 +1,1 @@
+export { FortuneTeller } from './FortuneTeller';

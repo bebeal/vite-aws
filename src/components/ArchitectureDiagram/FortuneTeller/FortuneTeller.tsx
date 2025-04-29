@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../../Loader/Loader';
 
 interface FortuneTellerProps {
   modelId?: string;
