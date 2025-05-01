@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { ArchitectureDiagram } from '../components/ArchitectureDiagram/ArchitectureDiagram';
+import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 
 import '../index.css';
 

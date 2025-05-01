@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AnyRoute, createRouter as createReactRouter, RouterConstructorOptions, RouterHistory } from '@tanstack/react-router';
 import { ThemeProvider } from 'next-themes';
 import { routeTree } from './routeTree.gen';
-import { Loader } from './components/Loader/Loader';
+import { Loader } from './components/Loader';
 import { useEffect, useState } from 'react';
 
 export const queryClient = new QueryClient();

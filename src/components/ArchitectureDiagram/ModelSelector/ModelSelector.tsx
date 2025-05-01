@@ -14,7 +14,7 @@ import Ai21Image from '../../../assets/images/ai21labs.jpeg';
 import Claude37SonnetImage from '../../../assets/images/claude3_7.png';
 import LumaImage from '../../../assets/images/luma.png';
 import { Loader } from '../../Loader/Loader';
-import { ServiceBox } from '../ServiceBox/ServiceBox';
+import { ServiceBox } from '../ServiceBox';
 // model icons
 const Claude37SonnetIcon = (props: React.HTMLAttributes<HTMLImageElement>) => <img src={Claude37SonnetImage} alt='claude37sonnet' {...props} />;
 

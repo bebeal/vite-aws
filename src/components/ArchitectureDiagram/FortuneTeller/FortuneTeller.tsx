@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { Loader } from '../../Loader/Loader';
+import { Loader } from '../../Loader';
 
 interface FortuneTellerProps {
   modelId?: string;
@@ -47,9 +47,9 @@ export const FortuneTeller: React.FC<FortuneTellerProps> = ({ modelId }) => {
         <>
           <div className='h-[1px] w-8 dark:bg-gray-600 peer-hover:bg-purple-500'></div>
           <div className='max-w-[300px] p-4 dark:bg-[#1a1a1a] rounded-md shadow-lg text-sm border border-gray-400 dark:border-gray-600 peer-hover:border-purple-500'>
-            <p className={`dark:text-gray-200 font-medium whitespace-normal text-xs text-center flex items-center justify-center ${error ? 'text-red-500' : ''}`}>
+            <p className={`dark:text-gray-200 font-medium whitespace-normal text-xs text-center flex items-center justify-center`}>
               {error ? (
-                <span>{displayText}</span>
+                <span className='text-red-400 w-[330px]'>{displayText}</span>
               ) : (
                 <span className='inline-flex items-center'>
                   🥠<span className='mx-1'>{displayText.replace(/🥠/g, '').replace(/"/g, '')}</span>🥠
