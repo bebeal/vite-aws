@@ -10,6 +10,8 @@ Template for a web server application deployed with a cost-effective scalable AW
 - Serverless API endpoints using Lambda functions with Express routes for on-demand compute
 - Infrastructure as Code using AWS CDK for manageable deployments
 - Near-zero cost when idle, with pay-per-use pricing for both static hosting and API compute
+- (<small style="font-size:0.9em">Branch available with built in MDX rendering:
+<a href="https://github.com/bebeal/vite-aws/tree/with-mdx"><img src="https://img.shields.io/badge/-with--mdx%20branch-ffffff?logo=github&style=flat&logoColor=000000" style="height:14px; vertical-align:middle"></a></small> - <a href="https://vite-aws.com/posts">https://vite-aws.com/posts</a>)
 
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
