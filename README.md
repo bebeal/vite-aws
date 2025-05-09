@@ -46,6 +46,7 @@ Template for a web server application deployed with a cost-effective scalable AW
 * [svgr](https://github.com/gregberge/svgr)
 * [react-tweet](https://github.com/vercel/react-tweet)
 * [next-themes](https://github.com/pacocoursey/next-themes)
+* [@mdx-js/rollup](https://github.com/mdx-js/mdx/tree/main/packages/rollup)
 
 ## Environment Setup
 
