@@ -11,7 +11,9 @@ export default defineConfig((options) => {
   // Shared Config for both Client and SSR Build
   const sharedConfig = {
     plugins: [
-      nodePolyfills(),
+      nodePolyfills({
+        exclude: ['vm']
+      }),
       consolePrefix(options?.isSsrBuild ? '[server]' : '[app]', options?.isSsrBuild ? 'magenta' : 'cyan'),
       // for importing .svg files as react components, and .svg?url as URLs
       svgr({
@@ -22,6 +24,9 @@ export default defineConfig((options) => {
       TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
       react(),
     ],
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.mdx', '.md'],
+    },
   };
 
   if (options?.isSsrBuild) {
@@ -35,7 +40,7 @@ export default defineConfig((options) => {
         outDir: 'dist/server',
       },
       ssr: {
-        noExternal: ['react-tweet'],
+        noExternal: ['dotenv', 'react-tweet', 'express', 'serverless-http'],
       },
     } satisfies UserConfig;
   } else {

@@ -51,7 +51,7 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
       },
       build: { minify: true, ssr: true },
       ssr: {
-        noExternal: ['react-tweet'],
+        noExternal: ['dotenv', 'react-tweet', 'express', 'serverless-http'],
       },
     });
     // Use vite's connect instance as middleware (remains valid after restarts)

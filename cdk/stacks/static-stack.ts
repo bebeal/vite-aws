@@ -27,6 +27,7 @@ export class StaticStack extends Stack {
 
     // Create S3 bucket for static files
     const bucket = new Bucket(this, 'vite-aws-bucket', {
+      bucketName: `vite-aws-bucket-${this.account}`,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: false,
@@ -60,6 +61,8 @@ export class StaticStack extends Stack {
       enableAcceptEncodingBrotli: true,
     });
 
+    const apiOrigin = new RestApiOrigin(props.api);
+
     const behaviors: Record<string, any> = {
       // Cache static assets longer
       '/assets/*': {
@@ -70,12 +73,12 @@ export class StaticStack extends Stack {
       },
       // Handle API requests
       '/api/*': {
-        origin: new RestApiOrigin(props.api),
+        origin: apiOrigin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_ALL,
         cachePolicy: CachePolicy.CACHING_DISABLED,
         originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER
-      }
+      },
     };
 
     // Block hackerman countries
