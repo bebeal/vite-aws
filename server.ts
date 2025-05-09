@@ -51,7 +51,7 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
       },
       build: { minify: true, ssr: true },
       ssr: {
-        noExternal: ['react-tweet'],
+        noExternal: ['dotenv', 'react-tweet', 'express', 'serverless-http'],
       },
     });
     // Use vite's connect instance as middleware (remains valid after restarts)
@@ -71,6 +71,12 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
   serverLog('API routes:', api.listRoutes());
 
   const environment = vite?.environments.ssr;
+
+  // Serve the raw markdown string on routes with the explicit .md/.mdx extensions
+  app.get('/*.(md|mdx)', (req, res) => {
+    const filePath = path.join(__dirname, 'src/routes', req.path);
+    res.type('text/markdown').sendFile(filePath);
+  });
 
   // serve index.html from parent server for all non-file requests
   app.use('*', async (req, res, next) => {

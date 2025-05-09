@@ -16,6 +16,7 @@ const makeApp = () => {
 };
 
 try {
+  console.log('Starting CDK build...');
   makeApp();
   console.log('\x1b[32m✓ CDK build successful\x1b[0m');
 } catch (error) {

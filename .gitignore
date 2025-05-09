@@ -54,3 +54,8 @@ cdk.context.json
 
 # .react-router
 .react-router
+
+# Generated files
+yarn.lock
+package-lock.json
+routeTree.gen.ts

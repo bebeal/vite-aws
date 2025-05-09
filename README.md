@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="https://raw.githubusercontent.com/bebeal/vite-aws/main/public/favicon.ico" width="32" style="vertical-align: middle;"> vite-aws
+# <img src="https://raw.githubusercontent.com/bebeal/vite-aws/main/public/favicon.ico" width="32" style="vertical-align: middle;"> vite-aws with-mdx
 
 </div>
 
@@ -10,6 +10,7 @@ Template for a web server application deployed with a cost-effective scalable AW
 - Serverless API endpoints using Lambda functions with Express routes for on-demand compute
 - Infrastructure as Code using AWS CDK for manageable deployments
 - Near-zero cost when idle, with pay-per-use pricing for both static hosting and API compute
+- Built in MDX rendering see <a href="https://vite-aws.com/posts">https://vite-aws.com/posts</a>
 
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
@@ -106,55 +107,48 @@ yarn deploy       // deploy the cdk
     <img width="894" alt="Screenshot 2025-04-05 at 6 27 30 PM" src="https://github.com/user-attachments/assets/94780d61-498c-4153-8452-bd9c05dac17d" />
 </div>
 
-## Build
+## MDX
 
-The build outputs to `dist` folder. The build is split into two parts, the client side and the server side.
-- Note: you can turn off sourcemaps in the vite config and get rid of all the .map files to save space
+This branch adds MDX support with the following features:
 
-```console
-dist
-├── client
-│   ├── assets
-│   │   ├── ai21labs-Dm-89zQZ.jpeg                     4.83 kB │ gzip:     4.31 kB
-│   │   ├── BerkeleyMonoVariable-DfD1MzWf.woff2      162.33 kB │ gzip:   162.43 kB
-│   │   ├── BerkeleyMonoVariable-IbYT6BjK.ttf        507.43 kB │ gzip:   208.20 kB
-│   │   ├── claude3_7-CPbaIE2D.png                     5.98 kB │ gzip:     6.01 kB
-│   │   ├── index-D1B6zixv.js                        173.55 kB │ gzip:    55.35 kB
-│   │   ├── index-D1B6zixv.js.map                    819.60 kB │ gzip:   185.71 kB
-│   │   ├── index-DaWht-Dn.js                        179.31 kB │ gzip:    73.24 kB
-│   │   ├── index-DaWht-Dn.js.map                    553.78 kB │ gzip:   158.46 kB
-│   │   ├── index-iNthRr0C.css                        18.82 kB │ gzip:     4.73 kB
-│   │   ├── luma-DfNJhya8.png                        169.92 kB │ gzip:   154.67 kB
-│   │   ├── react-DJzViB8t.js                         16.93 kB │ gzip:     6.12 kB
-│   │   ├── react-DJzViB8t.js.map                     66.67 kB │ gzip:    18.32 kB
-│   │   ├── tanstack-BirXOm_-.js                     129.93 kB │ gzip:    41.53 kB
-│   │   ├── tanstack-BirXOm_-.js.map                 528.76 kB │ gzip:   129.84 kB
-│   │   └── tanstack-router-Q5CIJCHp.png              10.38 kB │ gzip:    10.43 kB
-│   ├── favicon.ico                                  252.71 kB │ gzip:    18.97 kB
-│   ├── index.html                                      .83 kB │ gzip:      .43 kB
-│   └── robots.txt                                      .06 kB │ gzip:      .08 kB
-└── server
-    ├── api
-    │   ├── api.d.ts                                    .35 kB │ gzip:      .20 kB
-    │   ├── api.js                                     8.85 kB │ gzip:     2.87 kB
-    │   └── utils
-    │       ├── parsing.d.ts                            .23 kB │ gzip:      .17 kB
-    │       └── parsing.js                             2.03 kB │ gzip:      .82 kB
-    ├── assets
-    │   └── index-Cpb1_duP.js                        133.96 kB │ gzip:    49.47 kB
-    ├── entry-server.js                                7.10 kB │ gzip:     2.35 kB
-    ├── favicon.ico                                  252.71 kB │ gzip:    18.97 kB
-    ├── package.json                                   3.14 kB │ gzip:     1.16 kB
-    ├── robots.txt                                      .06 kB │ gzip:      .08 kB
-    ├── server.d.ts                                     .34 kB │ gzip:      .21 kB
-    ├── server.js                                      5.15 kB │ gzip:     2.03 kB
-    ├── tsconfig.node.tsbuildinfo                    139.85 kB │ gzip:    40.37 kB
-    ├── vite.config.d.ts                                .08 kB │ gzip:      .10 kB
-    ├── vite.config.js                                 2.67 kB │ gzip:      .85 kB
-    └── yarn.lock                                         0 kB │ gzip:      .02 kB
+- MDX file rendering with frontmatter support
+- Math equations with KaTeX
+- GitHub Flavored Markdown
+- Color chips for hex codes
+- Syntax highlighting with starry-night
+- Auto MDX rendering for routes under `/posts`
 
-7 directories, 33 files
-```
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <p>
+          <a href="https://vite-aws.com/posts/test">https://vite-aws.com/posts/test</a><br>
+          <code>/posts/test</code>
+        </p>
+      </td>
+      <td align="center">
+        <p>
+          <a href="https://vite-aws.com/posts/test.mdx">https://vite-aws.com/posts/test.mdx</a><br>
+          <code>/posts/test.mdx</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">
+        <img
+          src="https://github.com/user-attachments/assets/f18db7ce-b3d2-43bc-9cc2-2851c24c3681"
+          alt="Image of mdx client side"
+        />
+      </td>
+      <td valign="top" align="center">
+        <img
+          src="https://github.com/user-attachments/assets/469f24c9-aa00-4a83-9a5d-eea38899d9a3"
+          alt="Image of raw mdx server side"
+        />
+      </td>
+    </tr>
+  </table>
+</div>
 
-- `client/` is directly served as shown from s3 through cloudfront
-- `server/` becomes the lambda function code
+

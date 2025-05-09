@@ -2,6 +2,7 @@ import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Cors, LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { AnyPrincipal, Effect, PolicyDocument, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture, Code, DockerImageCode, DockerImageFunction, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { LogGroup } from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import * as dotenv from 'dotenv';
 import path from 'path';
@@ -16,6 +17,10 @@ export class ApiStack extends Stack {
   constructor(scope: Construct, id: string, props?: ApiStackProps) {
     super(scope, id, props);
 
+    const logGroup = new LogGroup(this, 'ExpressHandlerLogs', {
+      logGroupName: `/aws/lambda/${this.stackName}-ExpressHandler-logs`
+    });
+
     // Create Lambda function
     const handler = new DockerImageFunction(this, 'ExpressHandler', {
       code: DockerImageCode.fromImageAsset(path.resolve('.')),
@@ -27,6 +32,8 @@ export class ApiStack extends Stack {
         ),
         NODE_ENV: 'production',
       },
+      functionName: `${this.stackName}-ExpressHandler`,
+      logGroup: logGroup,
       timeout: Duration.seconds(60),
       memorySize: 1024,
       architecture: Architecture.ARM_64,

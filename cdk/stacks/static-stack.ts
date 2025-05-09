@@ -6,6 +6,7 @@ import {
   CachePolicy,
   Distribution,
   GeoRestriction,
+  OriginRequestHeaderBehavior,
   OriginRequestPolicy,
   PriceClass,
   ViewerProtocolPolicy
@@ -27,6 +28,7 @@ export class StaticStack extends Stack {
 
     // Create S3 bucket for static files
     const bucket = new Bucket(this, 'vite-aws-bucket', {
+      bucketName: `vite-aws-bucket-${this.account}`,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: false,
@@ -51,6 +53,10 @@ export class StaticStack extends Stack {
       throw new Error('API Gateway must be provided for API requests to work');
     }
 
+    const mdxPolicy = new OriginRequestPolicy(this, 'vite-aws-mdx-policy', {
+      headerBehavior: OriginRequestHeaderBehavior.allowList('Content-Type')
+    });
+
     // Create assets cache policy
     const assetsCachePolicy = new CachePolicy(this, 'vite-aws-assets-cache-policy', {
       minTtl: Duration.days(365),
@@ -60,7 +66,23 @@ export class StaticStack extends Stack {
       enableAcceptEncodingBrotli: true,
     });
 
+    const apiOrigin = new RestApiOrigin(props.api);
+
     const behaviors: Record<string, any> = {
+      '/*.md': {
+        origin: apiOrigin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_ALL,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
+        originRequestPolicy: mdxPolicy
+      },
+      '/*.mdx': {
+        origin: apiOrigin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_ALL,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
+        originRequestPolicy: mdxPolicy
+      },
       // Cache static assets longer
       '/assets/*': {
         origin: s3Origin,
@@ -70,12 +92,12 @@ export class StaticStack extends Stack {
       },
       // Handle API requests
       '/api/*': {
-        origin: new RestApiOrigin(props.api),
+        origin: apiOrigin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_ALL,
         cachePolicy: CachePolicy.CACHING_DISABLED,
         originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER
-      }
+      },
     };
 
     // Block hackerman countries

@@ -1,17 +1,37 @@
 import consolePrefix from '@bebeal/console-prefix-plugin';
+import rehypeColorChips from '@bebeal/rehype-color-chips';
+import mdx from '@mdx-js/rollup';
 import tailwindcss from '@tailwindcss/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig, UserConfig } from 'vite';
-import svgr from 'vite-plugin-svgr';
+import rehypeKatex from 'rehype-katex';
+import rehypeCodeTerminal from '@bebeal/rehype-code-terminal';
+import rehypeStarryNight from 'rehype-starry-night'
+import { common } from '@wooorm/starry-night'
+import sourceZig from '@wooorm/starry-night/source.zig'
+import sourceScala from '@wooorm/starry-night/source.scala'
+import sourceJulia from '@wooorm/starry-night/source.julia'
+import sourceHaskell from '@wooorm/starry-night/source.haskell'
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import { defineConfig, loadEnv, UserConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig((options) => {
+  const mode = options.mode || 'development';
+  const env = loadEnv(mode, process.cwd(), '');
+  const isProd = mode === 'production' || env.NODE_ENV === 'production';
+
   // Shared Config for both Client and SSR Build
   const sharedConfig = {
     plugins: [
-      nodePolyfills(),
+      nodePolyfills({
+        exclude: ['vm']
+      }),
       consolePrefix(options?.isSsrBuild ? '[server]' : '[app]', options?.isSsrBuild ? 'magenta' : 'cyan'),
       // for importing .svg files as react components, and .svg?url as URLs
       svgr({
@@ -19,9 +39,24 @@ export default defineConfig((options) => {
         include: '**/*.svg',
       }),
       tailwindcss(),
+      mdx({
+        development: !isProd,
+        providerImportSource: '@mdx-js/react',
+        remarkPlugins: [
+          remarkFrontmatter,
+          remarkMath,
+          remarkGfm,
+          [remarkMdxFrontmatter, { name: 'frontMatter' }],
+        ],
+        rehypePlugins: [rehypeKatex, rehypeColorChips, rehypeCodeTerminal, [rehypeStarryNight, { grammars: [...common, sourceZig, sourceScala, sourceJulia, sourceHaskell] }]],
+        recmaPlugins: []
+      }),
       TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
       react(),
     ],
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.mdx', '.md'],
+    },
   };
 
   if (options?.isSsrBuild) {
@@ -35,7 +70,7 @@ export default defineConfig((options) => {
         outDir: 'dist/server',
       },
       ssr: {
-        noExternal: ['react-tweet'],
+        noExternal: ['dotenv', 'react-tweet', 'express', 'serverless-http'],
       },
     } satisfies UserConfig;
   } else {
@@ -67,7 +102,18 @@ export default defineConfig((options) => {
                 '@tanstack/react-query-devtools',
                 '@tanstack/react-router-devtools',
               ],
-            }
+              // mdx dependencies
+              'mdx': [
+                '@bebeal/rehype-color-chips',
+                '@mdx-js/rollup',
+                '@mdx-js/react',
+                'rehype-katex',
+                'remark-frontmatter',
+                'remark-gfm',
+                'remark-math',
+                'remark-mdx-frontmatter',
+              ]
+            },
           }
         }
       },
