@@ -74,7 +74,7 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
 
   // Serve the raw markdown string on routes with the explicit .md/.mdx extensions
   app.get('/*.(md|mdx)', (req, res) => {
-    const filePath = path.join(__dirname, 'src/routes', req.path);
+    const filePath = !isProd ? path.join(__dirname, 'src/routes', req.path) : path.join(__dirname, req.path);
     res.type('text/markdown').sendFile(filePath);
   });
 
