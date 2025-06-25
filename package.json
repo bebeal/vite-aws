@@ -30,6 +30,7 @@
     "@aws-sdk/client-bedrock-agent": "^3.806.0",
     "@aws-sdk/client-bedrock-agent-runtime": "^3.806.0",
     "@aws-sdk/client-bedrock-runtime": "^3.806.0",
+    "@carbon/icons-react": "^11.62.0",
     "@tanstack/react-query": "^5.75.5",
     "@tanstack/react-router": "^1.120.3",
     "@tanstack/react-start": "^1.120.3",
