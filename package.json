@@ -84,7 +84,9 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-darwin-arm64": "4.40.2",
-    "@rollup/rollup-linux-arm64-gnu": "4.40.2"
+    "@rollup/rollup-linux-arm64-gnu": "4.40.2",
+    "@rollup/rollup-linux-x64-gnu": "4.40.2",
+    "@rollup/rollup-win32-x64-msvc": "4.40.2"
   },
   "engines": {
     "node": ">=20",
@@ -93,10 +95,12 @@
   },
   "os": [
     "linux",
-    "darwin"
+    "darwin",
+    "win32"
   ],
   "cpu": [
-    "arm64"
+    "arm64",
+    "x64"
   ],
   "packageManager": "yarn@4.9.1"
 }
