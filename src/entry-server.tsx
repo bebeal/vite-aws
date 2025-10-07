@@ -1,18 +1,19 @@
 // entry-server: renders the app using the framework's SSR API: ReactDomServer.renderToString in this case
 import express from 'express';
 import ReactDomServer from 'react-dom/server';
-import { RouterProvider } from '@tanstack/react-router';
+import { RouterProvider, createMemoryHistory } from '@tanstack/react-router';
 import { createRouter } from './router';
-
-const router = createRouter();
 
 const render = async (req: express.Request) => {
   const fetchRequest = createFetchRequest(req);
   const url = new URL(fetchRequest.url);
   const path = url.pathname + url.search;
 
-  await router.navigate({
-    to: path,
+  // Create a new router instance for each request to avoid state leakage
+  const router = createRouter({
+    history: createMemoryHistory({
+      initialEntries: [path],
+    }),
   });
   await router.load();
   const html = ReactDomServer.renderToString(<RouterProvider router={router} />);
