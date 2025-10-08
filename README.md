@@ -4,19 +4,24 @@
 
 </div>
 
+<div align="center">
+  <a href="https://github.com/bebeal/vite-aws/actions/workflows/deploy.yml">
+    <img alt="Deploy Status" src="https://github.com/bebeal/vite-aws/actions/workflows/deploy.yml/badge.svg?branch=with-actions">
+  </a>
+</div>
+
 Template for a web server application deployed with a cost-effective scalable AWS architecture:
 
 - Static content served via CloudFront distribution from S3
 - Serverless API endpoints using Lambda functions with Express routes for on-demand compute
 - Infrastructure as Code using AWS CDK for manageable deployments
 - Near-zero cost when idle, with pay-per-use pricing for both static hosting and API compute
-- (<small style="font-size:0.9em">Branch available with built in MDX rendering:
-<a href="https://github.com/bebeal/vite-aws/tree/with-mdx"><img src="https://img.shields.io/badge/-with--mdx%20branch-ffffff?logo=github&style=flat&logoColor=000000" style="height:14px; vertical-align:middle"></a></small> - <a href="https://vite-aws.com/posts">https://vite-aws.com/posts</a>)
+- Built in MDX rendering see <a href="https://vite-aws.com/posts">https://vite-aws.com/posts</a>
 
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
 <kbd>
-  <img src="https://github.com/user-attachments/assets/82ff8f5d-60fa-48b7-98d8-eb10c7a9b7f8" alt="Image of landing page" />
+  <img src="https://github.com/user-attachments/assets/65d6ab9b-4ba1-41fe-b0d4-169d236afb11" alt="Image of landing page" />
 </kbd></div>
 
 ## Features
@@ -37,6 +42,7 @@ Template for a web server application deployed with a cost-effective scalable AW
 * [AWS Lambda](https://docs.aws.amazon.com/lambda/)
 * [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
 * [AWS Bedrock](https://docs.aws.amazon.com/bedrock/)
+* [GitHub Actions](https://docs.github.com/actions)
 
 ## Other Libraries
 
@@ -106,4 +112,48 @@ yarn deploy       // deploy the cdk
 
 <div align="center">
     <img width="894" alt="Screenshot 2025-04-05 at 6 27 30 PM" src="https://github.com/user-attachments/assets/94780d61-498c-4153-8452-bd9c05dac17d" />
+</div>
+
+## MDX
+
+This branch adds MDX support with the following features:
+
+- MDX file rendering with frontmatter support
+- Math equations with KaTeX
+- GitHub Flavored Markdown
+- Color chips for hex codes
+- Syntax highlighting with starry-night
+- Auto MDX rendering for routes under `/posts`
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <p>
+          <a href="https://vite-aws.com/posts/test">https://vite-aws.com/posts/test</a><br>
+          <code>/posts/test</code>
+        </p>
+      </td>
+      <td align="center">
+        <p>
+          <a href="https://vite-aws.com/posts/test.mdx">https://vite-aws.com/posts/test.mdx</a><br>
+          <code>/posts/test.mdx</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">
+        <img
+          src="https://github.com/user-attachments/assets/f18db7ce-b3d2-43bc-9cc2-2851c24c3681"
+          alt="Image of mdx client side"
+        />
+      </td>
+      <td valign="top" align="center">
+        <img
+          src="https://github.com/user-attachments/assets/469f24c9-aa00-4a83-9a5d-eea38899d9a3"
+          alt="Image of raw mdx server side"
+        />
+      </td>
+    </tr>
+  </table>
 </div>

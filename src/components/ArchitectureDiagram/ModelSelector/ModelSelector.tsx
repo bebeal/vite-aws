@@ -11,12 +11,12 @@ import MistralIcon from '../../../assets/icons/mistral.svg';
 import OpenAIIcon from '../../../assets/icons/openai.svg';
 import StabilityAI from '../../../assets/icons/stability.svg';
 import Ai21Image from '../../../assets/images/ai21labs.jpeg';
-import Claude37SonnetImage from '../../../assets/images/claude3_7.png';
+import ClaudeImage from '../../../assets/images/claude.png';
 import LumaImage from '../../../assets/images/luma.png';
 import { Loader } from '../../Loader/Loader';
 import { ServiceBox } from '../ServiceBox';
 // model icons
-const Claude37SonnetIcon = (props: React.HTMLAttributes<HTMLImageElement>) => <img src={Claude37SonnetImage} alt='claude37sonnet' {...props} />;
+const ClaudeIcon = (props: React.HTMLAttributes<HTMLImageElement>) => <img src={ClaudeImage} alt='claude' {...props} />;
 
 // provider icons
 const Ai21Icon = (props: React.HTMLAttributes<HTMLImageElement>) => <img src={Ai21Image} alt='ai21' {...props} />;
@@ -37,7 +37,8 @@ const providerIcons = {
 };
 
 const modelIcons = {
-  'anthropic.claude-3-7-sonnet-20250219-v1:0': <Claude37SonnetIcon className='w-3 h-3 object-contain' style={{ marginTop: '-1px' }} />,
+  // mark a Claude model with a custom image icon
+  'anthropic.claude-sonnet-4-5-20250929-v1:0': <ClaudeIcon className='w-3 h-3 object-contain' style={{ marginTop: '-1px' }} />,
   'deepseek.r1-v1:0': <DeepSeekIcon className='w-3 h-3' />,
 } as const;
 
@@ -135,7 +136,20 @@ export const ModelSelector = ({ onModelSelect }: { onModelSelect: (modelId: stri
         }
       });
 
-      return Array.from(uniqueModelsMap.values());
+      // Sort by provider, then by model name (case-insensitive, natural)
+      const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+      const sorted = Array.from(uniqueModelsMap.values()).sort((a, b) => {
+        const providerA = (a.providerName || '').trim();
+        const providerB = (b.providerName || '').trim();
+        const byProvider = collator.compare(providerA, providerB);
+        if (byProvider !== 0) return byProvider;
+
+        const nameA = (a.modelName || a.modelId || '').trim();
+        const nameB = (b.modelName || b.modelId || '').trim();
+        return collator.compare(nameA, nameB);
+      });
+
+      return sorted;
     },
     enabled: hasOpened,
   });

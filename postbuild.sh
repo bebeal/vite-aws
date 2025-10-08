@@ -5,10 +5,13 @@ set -e
 SERVER_DEPS_PREFIX="\033[1;35m[server-deps]\033[0m"
 
 # Copy over package, yarn config, and yarn lock file
-echo -e "$SERVER_DEPS_PREFIX ♻️  Preparing server dependencies..."
+echo -e "$SERVER_DEPS_PREFIX ♻️ Preparing server dependencies..."
 cp package.json dist/server/
 cp .yarnrc.yml dist/server/
 touch dist/server/yarn.lock
+
+# copy over .md and .mdx file routes
+find src/routes/posts -name "*.md" -o -name "*.mdx" | while read file; do mkdir -p "dist/server/posts" && cp "$file" "dist/server/posts/$(basename "$file")"; done
 
 # I'm running this on macos (darwin) but need to build aws lambda dependencies (linux) so we need to run in a container
 # another option: https://stackoverflow.com/questions/34437900/how-to-load-npm-modules-in-aws-lambda (compile the modules on an EC2 spot instance)

@@ -72,6 +72,12 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
 
   const environment = vite?.environments.ssr;
 
+  // Serve the raw markdown string on routes with the explicit .md/.mdx extensions
+  app.get('/*.(md|mdx)', (req, res) => {
+    const filePath = !isProd ? path.join(__dirname, 'src/routes', req.path) : path.join(__dirname, req.path);
+    res.type('text/markdown').sendFile(filePath);
+  });
+
   // serve index.html from parent server for all non-file requests
   app.use('*', async (req, res, next) => {
     try {

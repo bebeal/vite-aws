@@ -1,10 +1,9 @@
 import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Cors, LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { AnyPrincipal, Effect, PolicyDocument, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { Architecture, Code, DockerImageCode, DockerImageFunction, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, DockerImageCode, DockerImageFunction } from 'aws-cdk-lib/aws-lambda';
 import { LogGroup } from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
-import * as dotenv from 'dotenv';
 import path from 'path';
 
 interface ApiStackProps extends StackProps {
@@ -21,15 +20,20 @@ export class ApiStack extends Stack {
       logGroupName: `/aws/lambda/${this.stackName}-ExpressHandler-logs`
     });
 
+    // Minimal allowlist for Lambda environment env vars 
+    const ALLOWED_ENV_KEYS = ['ACCOUNT_ID', 'GITHUB_REPO', 'DOMAIN', 'CERT_ARN'] as const;
+    const envFromAllowlist = Object.fromEntries(
+      ALLOWED_ENV_KEYS
+        .map((key) => [key, process.env[key]] as const)
+        .filter(([, value]) => value !== undefined)
+        .map(([key, value]) => [key, String(value)])
+    );
+
     // Create Lambda function
     const handler = new DockerImageFunction(this, 'ExpressHandler', {
       code: DockerImageCode.fromImageAsset(path.resolve('.')),
       environment: {
-        // ignore AWS_ variables as they are reserved for AWS
-        ...Object.fromEntries(
-          Object.entries(dotenv.config().parsed || {})
-            .filter(([key]) => !key.startsWith('AWS_'))
-        ),
+        ...envFromAllowlist,
         NODE_ENV: 'production',
       },
       functionName: `${this.stackName}-ExpressHandler`,

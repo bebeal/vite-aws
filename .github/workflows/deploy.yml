@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ with-actions ]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: with-actions
+
+    env:
+      ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      DOMAIN: ${{ secrets.DOMAIN }}
+      CERT_ARN: ${{ secrets.CERT_ARN }}
+      NODE_ENV: production
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn set version stable
+          yarn install --immutable
+
+      - name: Type check
+        run: yarn type-check
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build
+
+      - name: Tests
+        run: yarn test
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_ID }}:role/GitHubActionsDeployRole
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy
+        run: yarn deploy --quiet

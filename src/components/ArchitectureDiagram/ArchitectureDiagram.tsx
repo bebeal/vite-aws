@@ -6,11 +6,12 @@ import CloudFrontIcon from '../../assets/icons/cloudfront.svg';
 import ESLintIcon from '../../assets/icons/eslint.svg';
 import ExpressIcon from '../../assets/icons/express.svg';
 import GithubIcon from '../../assets/icons/github.svg';
+import GithubActionsIcon from '../../assets/icons/githubactions.svg';
 import LambdaIcon from '../../assets/icons/lambda.svg';
 import NodeIcon from '../../assets/icons/node.svg';
 import PrettierIcon from '../../assets/icons/prettier.svg';
 import ReactIcon from '../../assets/icons/react.svg';
-import S3Icon from '../../assets/icons/s3.svg';
+import S3Icon from '../../assets/icons/S3.svg';
 import TailwindIcon from '../../assets/icons/tailwind.svg';
 import TypeScriptIcon from '../../assets/icons/typescript.svg';
 import ViteIcon from '../../assets/icons/vite.svg';
@@ -20,7 +21,7 @@ import YarnIcon from '../../assets/icons/yarn.svg';
 import RadixImage from '../../assets/images/radix.png';
 import TanStackRouterImage from '../../assets/images/tanstack-router.png';
 import { FortuneTeller } from './FortuneTeller';
-import { ModelSelector, DefaultModels } from './ModelSelector';
+import { DefaultModels, ModelSelector } from './ModelSelector';
 import { ServiceBox } from './ServiceBox';
 
 const TanStackIcon = memo((props: HTMLProps<HTMLImageElement>) => <img src={TanStackRouterImage} alt='TanStack' {...props} />);
@@ -67,6 +68,11 @@ const DevToolsBox = () => (
       <ToolBox icon={<TypeScriptIcon className='w-5 h-5' />} name='TypeScript' description='Language' />
       <ToolBox icon={<PrettierIcon className='w-5 h-5' />} name='Prettier' description='Formatter' />
       <ToolBox icon={<VitestIcon className='w-5 h-5' />} name='Vitest' description='Testing' />
+    </div>
+    <div className='grid grid-cols-3 gap-1'>
+      <div className='col-start-2'>
+        <ToolBox icon={<GithubActionsIcon className='w-5 h-5' />} name='GitHub Actions' description='CI/CD' />
+      </div>
     </div>
   </div>
 );
@@ -351,7 +357,7 @@ export const ArchitectureDiagram = () => {
           {/* Vertical connecting line */}
           <div className='w-[1px] h-16 bg-gray-400 dark:bg-gray-600 mx-auto relative'>
             {/* Horizontal line from middle */}
-            <div className='absolute top-1/2 right-0 w-[200px] border-t border-gray-400 dark:border-gray-600 translate-x-full'></div>
+            <div className='absolute top-1/2 right-0 w-[210px] border-t border-gray-400 dark:border-gray-600 translate-x-full'></div>
           </div>
           <DevToolsBox />
         </div>
@@ -389,7 +395,7 @@ export const ArchitectureDiagram = () => {
               </div>
 
               {/* Middle section */}
-              <div className='col-span-8 flex flex-col justify-center gap-40 relative'>
+              <div className='col-span-8 flex flex-col justify-center gap-36 relative'>
                 <div className='absolute right-0 top-[10%] bottom-[10%] border-r-2 border-pink-500' />
                 {/* Static stack */}
                 <div className='border-2 border-pink-500 rounded-lg p-4 relative shadow-sm'>

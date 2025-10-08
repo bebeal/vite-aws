@@ -52,10 +52,9 @@ dist-ssr
 cdk.out
 cdk.context.json
 
-# .react-router
+# routers
 .react-router
+.tanstack
 
 # Generated files
-yarn.lock
-package-lock.json
 routeTree.gen.ts

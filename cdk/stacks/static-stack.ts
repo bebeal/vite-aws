@@ -4,8 +4,10 @@ import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatem
 import {
   AllowedMethods,
   CachePolicy,
+  CfnDistribution,
   Distribution,
   GeoRestriction,
+  OriginRequestHeaderBehavior,
   OriginRequestPolicy,
   PriceClass,
   ViewerProtocolPolicy
@@ -19,6 +21,23 @@ import path from 'path';
 interface StaticStackProps extends StackProps {
   domain?: string;
   api?: RestApi;
+}
+
+const attachCertificate = (scope: Construct, distribution: Distribution) => {
+  const certArn = process.env.CERT_ARN;
+  const alias   = process.env.DOMAIN;
+  if (!certArn) return;
+
+  const cert = Certificate.fromCertificateArn(scope, 'ExistingCert', certArn);
+  const cfn  = distribution.node.defaultChild as CfnDistribution;
+
+  cfn.addOverride('Properties.DistributionConfig.ViewerCertificate', {
+    AcmCertificateArn: cert.certificateArn,
+  });
+
+  if (alias) {
+    cfn.addOverride('Properties.DistributionConfig.Aliases', [alias]);
+  }
 }
 
 export class StaticStack extends Stack {
@@ -52,6 +71,10 @@ export class StaticStack extends Stack {
       throw new Error('API Gateway must be provided for API requests to work');
     }
 
+    const mdxPolicy = new OriginRequestPolicy(this, 'vite-aws-mdx-policy', {
+      headerBehavior: OriginRequestHeaderBehavior.allowList('Content-Type')
+    });
+
     // Create assets cache policy
     const assetsCachePolicy = new CachePolicy(this, 'vite-aws-assets-cache-policy', {
       minTtl: Duration.days(365),
@@ -64,6 +87,20 @@ export class StaticStack extends Stack {
     const apiOrigin = new RestApiOrigin(props.api);
 
     const behaviors: Record<string, any> = {
+      '/*.md': {
+        origin: apiOrigin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_ALL,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
+        originRequestPolicy: mdxPolicy
+      },
+      '/*.mdx': {
+        origin: apiOrigin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_ALL,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
+        originRequestPolicy: mdxPolicy
+      },
       // Cache static assets longer
       '/assets/*': {
         origin: s3Origin,
@@ -125,6 +162,9 @@ export class StaticStack extends Stack {
       priceClass: PriceClass.PRICE_CLASS_100,
       geoRestriction: GeoRestriction.denylist(...restrictedCountries)
     });
+
+    // Attach certificate to distribution
+    attachCertificate(this, distribution);
 
     // Deploy static files to S3 with proper caching
     new BucketDeployment(this, 'vite-aws-deployment', {

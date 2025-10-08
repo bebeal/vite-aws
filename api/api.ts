@@ -6,7 +6,6 @@ import { getTweet } from 'react-tweet/api';
 
 const modelsWithInferenceProfiles = [
   `arn:aws:bedrock:${process.env.AWS_REGION}:${process.env.ACCOUNT_ID}:inference-profile/us.deepseek.r1-v1:0`,
-  `arn:aws:bedrock:${process.env.AWS_REGION}:${process.env.ACCOUNT_ID}:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0`,
 ];
 
 const hasInferenceProfile = (modelId: string): boolean => {

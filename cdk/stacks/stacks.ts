@@ -1,14 +1,17 @@
-import 'dotenv/config';
 import { App } from 'aws-cdk-lib';
+import 'dotenv/config';
 import { ApiStack } from './api-stack';
+import { GitHubActionsStack } from './github-actions-stack';
 import { StaticStack } from './static-stack';
-import { AgentsStack } from './agents-stack';
 
 export const makeStacks = (app: App) => {
-  const agentsStack = new AgentsStack(app, 'vite-aws-agents', {
+  const githubRepo = process.env.GITHUB_REPO || 'bebeal/vite-aws';
+
+  const githubActionsStack = new GitHubActionsStack(app, 'vite-aws-github', {
     env: {
       region: process.env.AWS_REGION || 'us-west-2'
     },
+    githubRepo,
   });
 
   const apiStack = new ApiStack(app, 'vite-aws-api', {
@@ -29,5 +32,5 @@ export const makeStacks = (app: App) => {
   staticStack.addDependency(apiStack);
 
 
-  return [agentsStack, apiStack, staticStack];
+  return [githubActionsStack, apiStack, staticStack];
 };
