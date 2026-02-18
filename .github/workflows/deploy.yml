@@ -49,4 +49,4 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy
-        run: bun deploy --quiet
+        run: bun run deploy --quiet
