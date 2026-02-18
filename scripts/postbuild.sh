@@ -4,9 +4,9 @@ set -e
 # Define magenta color prefix (ANSI color code 35 for magenta, 1 for bold)
 SERVER_DEPS_PREFIX="\033[1;35m[server-deps]\033[0m"
 
-# Copy over package.json (no lockfile for cross-platform resolution)
+# Copy over package.json and lockfile for deterministic resolution
 echo -e "$SERVER_DEPS_PREFIX ♻️ Preparing server dependencies..."
-cp package.json dist/server/
+cp package.json bun.lock dist/server/
 
 # copy over .md and .mdx file routes
 find src/routes/posts -name "*.md" -o -name "*.mdx" | while read file; do mkdir -p "dist/server/posts" && cp "$file" "dist/server/posts/$(basename "$file")"; done
