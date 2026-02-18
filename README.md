@@ -21,7 +21,7 @@ Template for a web server application deployed with a cost-effective scalable AW
 <div align="center">
   <a href="https://vite-aws.com" rel="noopener noreferrer" target="_blank">vite-aws.com</a>
 <kbd>
-  <img src="https://github.com/user-attachments/assets/65d6ab9b-4ba1-41fe-b0d4-169d236afb11" alt="Image of landing page" />
+  <img src="https://github.com/user-attachments/assets/7e03f4c7-138e-43f8-9ea9-bba89cdb5a33" alt="Image of landing page" />
 </kbd></div>
 
 ## Features
