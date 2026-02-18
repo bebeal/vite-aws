@@ -7,6 +7,7 @@ date: 2025-05-06
 # Code Blocks
 
 ## Zig
+
 ```zig
 const std = @import("std");
 
@@ -20,6 +21,7 @@ pub fn main() !void {
 ```
 
 ## XWiki
+
 ```xwiki
 = Hello World =
 
@@ -35,6 +37,7 @@ This is **bold** and this is //italic//.
 ```
 
 ## TypeScript
+
 ```typescript
 interface Person {
   name: string;
@@ -50,6 +53,7 @@ console.log(greet(user));
 ```
 
 ## SQL
+
 ```sql
 CREATE TABLE employees (
   id INTEGER PRIMARY KEY,
@@ -63,6 +67,7 @@ SELECT * FROM employees;
 ```
 
 ## Scala
+
 ```scala
 object HelloWorld {
   def main(args: Array[String]): Unit = {
@@ -76,6 +81,7 @@ object HelloWorld {
 ```
 
 ## Swift
+
 ```swift
 import Foundation
 
@@ -90,6 +96,7 @@ print("Sum: \(add(a: 2, b: 3))")
 ```
 
 ## Rust
+
 ```rust
 fn main() {
     println!("Hello World");
@@ -101,6 +108,7 @@ fn main() {
 ```
 
 ## Ruby
+
 ```ruby
 puts "Hello World"
 
@@ -122,6 +130,7 @@ puts person.greet
 ```
 
 ## Python
+
 ```python
 def greet(name):
     return f"Hello, {name}!"
@@ -135,6 +144,7 @@ print(squares)
 ```
 
 ## Perl
+
 ```perl
 #!/usr/bin/perl
 use strict;
@@ -151,6 +161,7 @@ print "Name: $hash{name}\n";
 ```
 
 ## PHP
+
 ```php
 <?php
 echo "Hello World";
@@ -164,6 +175,7 @@ echo add(2, 3);
 ```
 
 ## MySQL
+
 ```mysql
 CREATE TABLE users (
     id INT PRIMARY KEY,
@@ -177,6 +189,7 @@ SELECT * FROM users;
 ```
 
 ## Lua
+
 ```lua
 print("Hello World")
 
@@ -189,6 +202,7 @@ print(add(2, 3))
 ```
 
 ## Kotlin
+
 ```kotlin
 fun main() {
     val message = "Hello World"
@@ -197,6 +211,7 @@ fun main() {
 ```
 
 ## Julia
+
 ```julia
 println("Hello World")
 
@@ -209,15 +224,17 @@ println(add(2, 3))
 ```
 
 ## JavaScript
+
 ```javascript
 function greet(name) {
   return `Hello, ${name}!`;
 }
 
-console.log(greet("World"));
+console.log(greet('World'));
 ```
 
 ## Java
+
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -227,26 +244,29 @@ public class HelloWorld {
 ```
 
 ## HTML
+
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Hello World</title>
-</head>
-<body>
-  <h1>Hello World</h1>
-  <p>This is a sample page.</p>
-</body>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>This is a sample page.</p>
+  </body>
 </html>
 ```
 
 ## Haskell
+
 ```haskell
 main :: IO ()
 main = putStrLn "Hello World"
 ```
 
 ## Go
+
 ```go
 package main
 
@@ -258,6 +278,7 @@ func main() {
 ```
 
 ## CSS
+
 ```css
 .container {
   display: flex;
@@ -272,6 +293,7 @@ func main() {
 ```
 
 ## Objective-C
+
 ```objectivec
 #import <Foundation/Foundation.h>
 
@@ -284,6 +306,7 @@ int main() {
 ```
 
 ## C#
+
 ```csharp
 using System;
 
@@ -295,6 +318,7 @@ class Program {
 ```
 
 ## C++
+
 ```cpp
 #include <iostream>
 
@@ -305,6 +329,7 @@ int main() {
 ```
 
 ## C
+
 ```c
 #include <stdio.h>
 
@@ -315,6 +340,7 @@ int main() {
 ```
 
 ## Bash
+
 ```bash
 #!/bin/bash
 echo "Hello World"

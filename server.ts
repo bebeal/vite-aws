@@ -73,13 +73,13 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
   const environment = vite?.environments.ssr;
 
   // Serve the raw markdown string on routes with the explicit .md/.mdx extensions
-  app.get('/*.(md|mdx)', (req, res) => {
+  app.get(/\.(md|mdx)$/, (req, res) => {
     const filePath = !isProd ? path.join(__dirname, 'src/routes', req.path) : path.join(__dirname, req.path);
     res.type('text/markdown').sendFile(filePath);
   });
 
   // serve index.html from parent server for all non-file requests
-  app.use('*', async (req, res, next) => {
+  app.use('/{*path}', async (req, res, next) => {
     try {
       const url = req.originalUrl;
       // 1. Read index.html
@@ -109,6 +109,20 @@ export const createServer = async (root = process.cwd(), env = process.env.NODE_
       }
       next(e);
     }
+  });
+
+  // Error-handling middleware — Express requires 4 params for error middleware
+  app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+    void _next;
+    if (!isProd && vite) {
+      try {
+        vite.ssrFixStacktrace(err);
+      } catch {
+        /* source map failed, use original stack */
+      }
+    }
+    console.error(err.stack);
+    res.status(500).send(`<pre>${err.stack}</pre>`);
   });
 
   return { expressServer: app, viteServer: vite };

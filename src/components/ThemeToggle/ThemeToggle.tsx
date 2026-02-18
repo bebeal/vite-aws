@@ -94,31 +94,17 @@ export const ThemeToggle = () => {
             </div>
           )}
           {/* Light theme → show filled sun on the right */}
-          {theme !== 'system' && resolvedTheme === 'light' && (
-            <LightFilled
-              className="absolute top-1/2 -translate-y-1/2 right-1 w-3 h-3"
-            />
-          )}
+          {theme !== 'system' && resolvedTheme === 'light' && <LightFilled className='absolute top-1/2 -translate-y-1/2 right-1 w-3 h-3' />}
           {/* Dark theme → show filled moon on the left */}
-          {theme !== 'system' && resolvedTheme === 'dark' && (
-            <AsleepFilled
-              className="absolute top-1/2 -translate-y-1/2 left-1 w-3 h-3"
-            />
-          )}
+          {theme !== 'system' && resolvedTheme === 'dark' && <AsleepFilled className='absolute top-1/2 -translate-y-1/2 left-1 w-3 h-3' />}
 
           {/* System theme → show current-theme icon centered inside the thumb, inverted color */}
-          {theme === 'system' && (
+          {theme === 'system' &&
             (() => {
               const CurrentIcon = resolvedTheme === 'dark' ? AsleepFilled : LightFilled;
               const contrastColor = resolvedTheme === 'dark' ? '#0d1117' : '#e1e4e8';
-              return (
-                <CurrentIcon
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3"
-                  style={{ color: contrastColor }}
-                />
-              );
-            })()
-          )}
+              return <CurrentIcon className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3' style={{ color: contrastColor }} />;
+            })()}
         </div>
       </div>
     </div>

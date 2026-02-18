@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches-ignore: [ with-actions ]
+    branches-ignore: [with-actions]
   pull_request:
 
 jobs:
@@ -14,25 +14,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
+      - uses: oven-sh/setup-bun@v2
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn set version stable
-          yarn install --immutable
+        run: bun install
 
       - name: Type check
-        run: yarn type-check
+        run: bun type-check
 
       - name: Lint
-        run: yarn lint
+        run: bun lint
 
       - name: Build
-        run: yarn build
+        run: bun run build
 
       - name: Tests
-        run: yarn test
+        run: bun test

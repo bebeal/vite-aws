@@ -1,25 +1,25 @@
 import React, { HTMLProps, JSX, memo, ReactNode } from 'react';
-import APIGatewayIcon from '../../assets/icons/apigateway.svg';
-import BedrockIcon from '../../assets/icons/bedrock.svg';
-import CDKIcon from '../../assets/icons/cdk.svg';
-import CloudFrontIcon from '../../assets/icons/cloudfront.svg';
-import ESLintIcon from '../../assets/icons/eslint.svg';
-import ExpressIcon from '../../assets/icons/express.svg';
-import GithubIcon from '../../assets/icons/github.svg';
-import GithubActionsIcon from '../../assets/icons/githubactions.svg';
-import LambdaIcon from '../../assets/icons/lambda.svg';
-import NodeIcon from '../../assets/icons/node.svg';
-import PrettierIcon from '../../assets/icons/prettier.svg';
-import ReactIcon from '../../assets/icons/react.svg';
-import S3Icon from '../../assets/icons/S3.svg';
-import TailwindIcon from '../../assets/icons/tailwind.svg';
-import TypeScriptIcon from '../../assets/icons/typescript.svg';
-import ViteIcon from '../../assets/icons/vite.svg';
-import VitestIcon from '../../assets/icons/vitest.svg';
-import WebIcon from '../../assets/icons/web.svg';
-import YarnIcon from '../../assets/icons/yarn.svg';
-import RadixImage from '../../assets/images/radix.png';
-import TanStackRouterImage from '../../assets/images/tanstack-router.png';
+import APIGatewayIcon from '@/assets/icons/apigateway.svg';
+import BedrockIcon from '@/assets/icons/bedrock.svg';
+import CDKIcon from '@/assets/icons/cdk.svg';
+import CloudFrontIcon from '@/assets/icons/cloudfront.svg';
+import ESLintIcon from '@/assets/icons/eslint.svg';
+import ExpressIcon from '@/assets/icons/express.svg';
+import GithubIcon from '@/assets/icons/github.svg';
+import GithubActionsIcon from '@/assets/icons/githubactions.svg';
+import LambdaIcon from '@/assets/icons/lambda.svg';
+import NodeIcon from '@/assets/icons/node.svg';
+import PrettierIcon from '@/assets/icons/prettier.svg';
+import ReactIcon from '@/assets/icons/react.svg';
+import S3Icon from '@/assets/icons/S3.svg';
+import TailwindIcon from '@/assets/icons/tailwind.svg';
+import TypeScriptIcon from '@/assets/icons/typescript.svg';
+import ViteIcon from '@/assets/icons/vite.svg';
+import VitestIcon from '@/assets/icons/vitest.svg';
+import WebIcon from '@/assets/icons/web.svg';
+import BunIcon from '@/assets/icons/bun.svg';
+import RadixImage from '@/assets/images/radix.png';
+import TanStackRouterImage from '@/assets/images/tanstack-router.png';
 import { FortuneTeller } from './FortuneTeller';
 import { DefaultModels, ModelSelector } from './ModelSelector';
 import { ServiceBox } from './ServiceBox';
@@ -61,7 +61,7 @@ const DevToolsBox = () => (
   <div className='border border-gray-400 dark:border-gray-600 rounded-lg p-2 bg-gray-100 dark:bg-[#1a1a1a] shadow-sm transition-all flex flex-col gap-1'>
     <div className='grid grid-cols-3 gap-1'>
       <ToolBox icon={<ViteIcon className='w-5 h-5' />} name='Vite' description='Build Tool' />
-      <ToolBox icon={<YarnIcon className='w-5 h-5' />} name='Yarn' description='Package Manager' />
+      <ToolBox icon={<BunIcon className='w-5 h-5' />} name='Bun' description='Package Manager' />
       <ToolBox icon={<ESLintIcon className='w-5 h-5' />} name='ESLint' description='Linter' />
     </div>
     <div className='grid grid-cols-3 gap-1'>

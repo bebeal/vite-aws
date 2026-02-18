@@ -21,3 +21,4 @@ packages
 
 .yarn
 yarn.lock
+bun.lock

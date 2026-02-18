@@ -10,7 +10,7 @@ import {
   OriginRequestHeaderBehavior,
   OriginRequestPolicy,
   PriceClass,
-  ViewerProtocolPolicy
+  ViewerProtocolPolicy,
 } from 'aws-cdk-lib/aws-cloudfront';
 import { RestApiOrigin, S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
@@ -25,11 +25,11 @@ interface StaticStackProps extends StackProps {
 
 const attachCertificate = (scope: Construct, distribution: Distribution) => {
   const certArn = process.env.CERT_ARN;
-  const alias   = process.env.DOMAIN;
+  const alias = process.env.DOMAIN;
   if (!certArn) return;
 
   const cert = Certificate.fromCertificateArn(scope, 'ExistingCert', certArn);
-  const cfn  = distribution.node.defaultChild as CfnDistribution;
+  const cfn = distribution.node.defaultChild as CfnDistribution;
 
   cfn.addOverride('Properties.DistributionConfig.ViewerCertificate', {
     AcmCertificateArn: cert.certificateArn,
@@ -38,7 +38,7 @@ const attachCertificate = (scope: Construct, distribution: Distribution) => {
   if (alias) {
     cfn.addOverride('Properties.DistributionConfig.Aliases', [alias]);
   }
-}
+};
 
 export class StaticStack extends Stack {
   constructor(scope: Construct, id: string, props?: StaticStackProps) {
@@ -72,7 +72,7 @@ export class StaticStack extends Stack {
     }
 
     const mdxPolicy = new OriginRequestPolicy(this, 'vite-aws-mdx-policy', {
-      headerBehavior: OriginRequestHeaderBehavior.allowList('Content-Type')
+      headerBehavior: OriginRequestHeaderBehavior.allowList('Content-Type'),
     });
 
     // Create assets cache policy
@@ -92,21 +92,33 @@ export class StaticStack extends Stack {
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_ALL,
         cachePolicy: CachePolicy.CACHING_DISABLED,
-        originRequestPolicy: mdxPolicy
+        originRequestPolicy: mdxPolicy,
       },
       '/*.mdx': {
         origin: apiOrigin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_ALL,
         cachePolicy: CachePolicy.CACHING_DISABLED,
-        originRequestPolicy: mdxPolicy
+        originRequestPolicy: mdxPolicy,
       },
       // Cache static assets longer
       '/assets/*': {
         origin: s3Origin,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-        cachePolicy: assetsCachePolicy
+        cachePolicy: assetsCachePolicy,
+      },
+      '/*.css': {
+        origin: s3Origin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+        cachePolicy: assetsCachePolicy,
+      },
+      '/*.js': {
+        origin: s3Origin,
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+        cachePolicy: assetsCachePolicy,
       },
       // Handle API requests
       '/api/*': {
@@ -114,7 +126,7 @@ export class StaticStack extends Stack {
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         allowedMethods: AllowedMethods.ALLOW_ALL,
         cachePolicy: CachePolicy.CACHING_DISABLED,
-        originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER
+        originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
       },
     };
 
@@ -156,11 +168,11 @@ export class StaticStack extends Stack {
           responseHttpStatus: 200,
           responsePagePath: '/index.html',
           ttl: Duration.minutes(0),
-        }
+        },
       ],
       // USA, Canada, Europe, & Israel
       priceClass: PriceClass.PRICE_CLASS_100,
-      geoRestriction: GeoRestriction.denylist(...restrictedCountries)
+      geoRestriction: GeoRestriction.denylist(...restrictedCountries),
     });
 
     // Attach certificate to distribution
@@ -172,11 +184,7 @@ export class StaticStack extends Stack {
       destinationBucket: bucket,
       distribution,
       distributionPaths: ['/*'],
-      cacheControl: [
-        CacheControl.setPublic(),
-        CacheControl.maxAge(Duration.days(365)),
-        CacheControl.fromString('immutable'),
-      ],
+      cacheControl: [CacheControl.setPublic(), CacheControl.maxAge(Duration.days(365)), CacheControl.fromString('immutable')],
       prune: true,
     });
 

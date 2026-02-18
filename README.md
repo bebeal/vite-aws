@@ -26,33 +26,33 @@ Template for a web server application deployed with a cost-effective scalable AW
 
 ## Features
 
-* [Node](https://nodejs.org/docs)
-* [Yarn](https://classic.yarnpkg.com/en/docs)
-* [Vite](https://vitejs.dev/guide/)
-* [React](https://react.dev/reference/react)
-* [TypeScript](https://www.typescriptlang.org/docs/)
-* [Express](https://expressjs.com/en/4x/api.html)
-* [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/overview)
-* [TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)
-* [Tailwind](https://tailwindcss.com/docs)
-* [Eslint](https://eslint.org/docs/latest/)
-* [Prettier](https://prettier.io/docs/en/)
-* [AWS S3](https://docs.aws.amazon.com/s3/)
-* [AWS CloudFront](https://docs.aws.amazon.com/cloudfront/)
-* [AWS Lambda](https://docs.aws.amazon.com/lambda/)
-* [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
-* [AWS Bedrock](https://docs.aws.amazon.com/bedrock/)
-* [GitHub Actions](https://docs.github.com/actions)
+- [Node](https://nodejs.org/docs)
+- [Bun](https://bun.sh/docs)
+- [Vite](https://vitejs.dev/guide/)
+- [React](https://react.dev/reference/react)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [Express](https://expressjs.com/en/4x/api.html)
+- [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/overview)
+- [TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- [Tailwind](https://tailwindcss.com/docs)
+- [Eslint](https://eslint.org/docs/latest/)
+- [Prettier](https://prettier.io/docs/en/)
+- [AWS S3](https://docs.aws.amazon.com/s3/)
+- [AWS CloudFront](https://docs.aws.amazon.com/cloudfront/)
+- [AWS Lambda](https://docs.aws.amazon.com/lambda/)
+- [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- [AWS Bedrock](https://docs.aws.amazon.com/bedrock/)
+- [GitHub Actions](https://docs.github.com/actions)
 
 ## Other Libraries
 
-* [vitest](https://vitest.dev/guide/)
-* [nodemon](https://github.com/remy/nodemon)
-* [tsx](https://github.com/privatenumber/tsx)
-* [dotenv](https://github.com/motdotla/dotenv?tab=readme-ov-file)
-* [svgr](https://github.com/gregberge/svgr)
-* [react-tweet](https://github.com/vercel/react-tweet)
-* [next-themes](https://github.com/pacocoursey/next-themes)
+- [vitest](https://vitest.dev/guide/)
+- [nodemon](https://github.com/remy/nodemon)
+- [tsx](https://github.com/privatenumber/tsx)
+- [dotenv](https://github.com/motdotla/dotenv?tab=readme-ov-file)
+- [svgr](https://github.com/gregberge/svgr)
+- [react-tweet](https://github.com/vercel/react-tweet)
+- [next-themes](https://github.com/pacocoursey/next-themes)
 
 ## Environment Setup
 
@@ -64,11 +64,8 @@ Note: Env variables are injected into the lambda function as environment variabl
 
 ## Development
 
-Using yarn
 ```bash
-corepack enable         // enable corepack
-yarn set version berry  // set yarn to latest version
-yarn                    // install dependencies
+bun install             // install dependencies
 ```
 
 <div align="center">
@@ -76,16 +73,15 @@ yarn                    // install dependencies
 </div>
 
 ```bash
-yarn dev          // run the development server
+bun dev           // run the development server
 ```
 
 <div align="center">
     <img width="894" alt="Screenshot 2025-04-05 at 6 18 51 PM" src="https://github.com/user-attachments/assets/b4e63ddf-13ca-40b2-b876-4d96c1211885" />
 </div>
 
-
 ```bash
-yarn build        // build both client side and server side build
+bun build         // build both client side and server side build
 ```
 
 <div align="center">
@@ -95,19 +91,19 @@ yarn build        // build both client side and server side build
 **Additional Commands**
 
 ```bash
-yarn clean        // clean everything thats generated in the build/dev process
-yarn build:client // build the client side to dist/client
-yarn build:server // build the server side to dist/server
-yarn lint         // run eslint
-yarn format       // run prettier
-yarn test         // run tests
+bun clean         // clean everything thats generated in the build/dev process
+bun build:client  // build the client side to dist/client
+bun build:server  // build the server side to dist/server
+bun lint          // run eslint
+bun format        // run prettier
+bun test          // run tests
 ```
 
 ## CDK
 
 ```bash
-yarn build:cdk    // build the cdk
-yarn deploy       // deploy the cdk
+bun build:cdk     // build the cdk
+bun deploy        // deploy the cdk
 ```
 
 <div align="center">

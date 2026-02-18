@@ -4,11 +4,9 @@ set -e
 # Define magenta color prefix (ANSI color code 35 for magenta, 1 for bold)
 SERVER_DEPS_PREFIX="\033[1;35m[server-deps]\033[0m"
 
-# Copy over package, yarn config, and yarn lock file
+# Copy over package.json (no lockfile for cross-platform resolution)
 echo -e "$SERVER_DEPS_PREFIX ♻️ Preparing server dependencies..."
 cp package.json dist/server/
-cp .yarnrc.yml dist/server/
-touch dist/server/yarn.lock
 
 # copy over .md and .mdx file routes
 find src/routes/posts -name "*.md" -o -name "*.mdx" | while read file; do mkdir -p "dist/server/posts" && cp "$file" "dist/server/posts/$(basename "$file")"; done
@@ -17,6 +15,6 @@ find src/routes/posts -name "*.md" -o -name "*.mdx" | while read file; do mkdir 
 # another option: https://stackoverflow.com/questions/34437900/how-to-load-npm-modules-in-aws-lambda (compile the modules on an EC2 spot instance)
 echo -e "$SERVER_DEPS_PREFIX 🐳 Building Linux dependencies in Docker container..."
 cd dist/server/
-docker run --rm -v "$(pwd)":/app -w /app node sh -c "npm install -g corepack --force && corepack enable && yarn cache clean && yarn workspaces focus --production"
+docker run --rm -v "$(pwd)":/app -w /app node sh -c "npm install -g bun && bun install --production --ignore-scripts"
 
 echo -e "$SERVER_DEPS_PREFIX ✅ Server dependencies built successfully"

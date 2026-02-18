@@ -3,19 +3,19 @@ import React, { Suspense } from 'react';
 import { InlineTerminal, Terminal } from '@bebeal/rehype-code-terminal';
 
 import 'katex/dist/katex.min.css';
-import '@wooorm/starry-night/style/both'
-import '@bebeal/rehype-code-terminal/style.css'
+import '@wooorm/starry-night/style/both';
+import '@bebeal/rehype-code-terminal/style.css';
 
 export interface Frontmatter {
   title?: string;
   date?: string;
   [key: string]: unknown;
-};
+}
 
 export interface MDXModule {
   default: React.ComponentType;
   frontMatter?: Frontmatter;
-};
+}
 
 interface MDXLayoutProps {
   children: React.ReactNode;

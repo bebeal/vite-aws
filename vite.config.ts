@@ -1,3 +1,4 @@
+import path from 'path';
 import consolePrefix from '@bebeal/console-prefix-plugin';
 import rehypeCodeTerminal from '@bebeal/rehype-code-terminal';
 import rehypeColorChips from '@bebeal/rehype-color-chips';
@@ -30,7 +31,7 @@ export default defineConfig((options) => {
   const sharedConfig = {
     plugins: [
       nodePolyfills({
-        exclude: ['vm']
+        exclude: ['vm'],
       }),
       consolePrefix(options?.isSsrBuild ? '[server]' : '[app]', options?.isSsrBuild ? 'magenta' : 'cyan'),
       // for importing .svg files as react components, and .svg?url as URLs
@@ -42,19 +43,15 @@ export default defineConfig((options) => {
       mdx({
         development: !isProd,
         providerImportSource: '@mdx-js/react',
-        remarkPlugins: [
-          remarkFrontmatter,
-          remarkMath,
-          remarkGfm,
-          [remarkMdxFrontmatter, { name: 'frontMatter' }],
-        ],
+        remarkPlugins: [remarkFrontmatter, remarkMath, remarkGfm, [remarkMdxFrontmatter, { name: 'frontMatter' }]],
         rehypePlugins: [rehypeKatex, rehypeColorChips, rehypeCodeTerminal, [rehypeStarryNight, { grammars: [...common, sourceZig, sourceScala, sourceJulia, sourceHaskell] }]],
-        recmaPlugins: []
+        recmaPlugins: [],
       }),
       tanstackRouter({ target: 'react', autoCodeSplitting: true }),
       react(),
     ],
     resolve: {
+      alias: { '@': path.resolve(__dirname, './src') },
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.mdx', '.md'],
     },
   };
@@ -85,37 +82,23 @@ export default defineConfig((options) => {
         outDir: 'dist/client',
         rollupOptions: {
           onwarn(warning, warn) {
-              // tailwindcss does not support sourcemaps right now, see https://github.com/tailwindlabs/tailwindcss/discussions/16119
-              if (warning.code === 'SOURCEMAP_BROKEN') {
-                  return;
-              }
-              warn(warning);
+            // tailwindcss does not support sourcemaps right now, see https://github.com/tailwindlabs/tailwindcss/discussions/16119
+            if (warning.code === 'SOURCEMAP_BROKEN') {
+              return;
+            }
+            warn(warning);
           },
           output: {
             manualChunks: {
               // Core React
-              'react': ['react', 'react-dom', 'scheduler'],
+              react: ['react', 'react-dom', 'scheduler'],
               // TanStack
-              'tanstack': [
-                '@tanstack/react-query',
-                '@tanstack/react-router',
-                '@tanstack/react-query-devtools',
-                '@tanstack/react-router-devtools',
-              ],
+              tanstack: ['@tanstack/react-query', '@tanstack/react-router', '@tanstack/react-query-devtools', '@tanstack/react-router-devtools'],
               // mdx dependencies
-              'mdx': [
-                '@bebeal/rehype-color-chips',
-                '@mdx-js/rollup',
-                '@mdx-js/react',
-                'rehype-katex',
-                'remark-frontmatter',
-                'remark-gfm',
-                'remark-math',
-                'remark-mdx-frontmatter',
-              ]
+              mdx: ['@bebeal/rehype-color-chips', '@mdx-js/rollup', '@mdx-js/react', 'rehype-katex', 'remark-frontmatter', 'remark-gfm', 'remark-math', 'remark-mdx-frontmatter'],
             },
-          }
-        }
+          },
+        },
       },
     } satisfies UserConfig;
   }

@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { MDXLayout, MDXModule } from '../../components/MDXLayout';
+import { MDXLayout, MDXModule } from '@/components/MDXLayout';
 
 const posts = import.meta.glob<MDXModule>('./*.{md,mdx}', { eager: true });
 

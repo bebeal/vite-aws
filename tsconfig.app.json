@@ -20,6 +20,12 @@
     "jsx": "react-jsx",
     "types": ["node", "react", "react-dom", "vite/client"],
 
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

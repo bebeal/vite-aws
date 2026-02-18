@@ -4,6 +4,7 @@
 @plugin "@tailwindcss/typography";
 /* dark theme to be driven by a CSS selector */
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
 
 @theme {
   --font-mono: 'Berkeley Mono', monospace;

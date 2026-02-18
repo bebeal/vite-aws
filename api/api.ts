@@ -37,7 +37,7 @@ class Api {
     // Add more routes here as needed
 
     // catch all 404 for everything else
-    this.router.use('*', (req, res) => {
+    this.router.use('/{*path}', (req, res) => {
       res.status(404).send(`${req.originalUrl || req.url} not found`)
     })
   }
@@ -188,7 +188,7 @@ class Api {
     }
   }
 
-  private getTweet = async (req: Request, res: Response) => {
+  private getTweet = async (req: Request<{ id: string }>, res: Response) => {
     try {
       const { id } = req.params
       const tweet = await getTweet(id)
