@@ -4,12 +4,12 @@ set -e
 # Define magenta color prefix (ANSI color code 35 for magenta, 1 for bold)
 SERVER_DEPS_PREFIX="\033[1;35m[server-deps]\033[0m"
 
-# Copy over package.json and lockfile for deterministic resolution
+# Copy over package.json (no lockfile - let bun resolve for Linux platform)
 echo -e "$SERVER_DEPS_PREFIX ♻️ Preparing server dependencies..."
-cp package.json bun.lock dist/server/
+cp package.json dist/server/
 
 # copy over .md and .mdx file routes
-find src/routes/posts -name "*.md" -o -name "*.mdx" | while read file; do mkdir -p "dist/server/posts" && cp "$file" "dist/server/posts/$(basename "$file")"; done
+find src/routes -name "*.md" -o -name "*.mdx" | while read file; do mkdir -p "dist/server" && cp "$file" "dist/server/$(basename "$file")"; done
 
 # I'm running this on macos (darwin) but need to build aws lambda dependencies (linux) so we need to run in a container
 # another option: https://stackoverflow.com/questions/34437900/how-to-load-npm-modules-in-aws-lambda (compile the modules on an EC2 spot instance)
